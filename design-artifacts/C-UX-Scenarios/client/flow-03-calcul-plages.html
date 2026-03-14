@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Flow 03 — Calcul des plages</title>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family: 'Segoe UI', system-ui, sans-serif;background:#f0ebe6;display:flex;align-items:center;flex-direction:column;padding:32px 16px;min-height:100vh}
+    .phone{width:320px;height:640px;background:#1c1c1e;border-radius:44px;padding:14px;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+    .screen{width:100%;height:100%;background:#faf7f5;border-radius:32px;overflow:hidden;display:flex;flex-direction:column}
+    .app-bar{background:#c9756c;color:#fff;padding:34px 18px 14px;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-weight:800}
+    .screen-body{flex:1;padding:18px;display:flex;flex-direction:column;gap:12px}
+    .screen-title{font-weight:700;color:#3d2b1f;font-size:1.05rem}
+    .screen-sub{color:#7a6255;font-size:.82rem}
+    .month-picker{display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .month-label{font-weight:700;color:#5c3d2e}
+    .month-actions button{background:transparent;border:none;font-weight:700;color:#7a6255;cursor:pointer;padding:8px}
+    .slots{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+    .day-row{background:#fff;border:1.5px solid #e5ddd8;border-radius:10px;padding:8px;display:flex;flex-direction:column;gap:8px}
+    .day-header{display:flex;justify-content:space-between;align-items:center;color:#6a5248;font-weight:700}
+    .times{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+    .time-btn{background:#c9756c;color:#fff;border:none;border-radius:8px;padding:8px 10px;font-weight:700;cursor:pointer}
+    .time-btn.small{padding:6px 8px;font-size:.86rem}
+    .note{font-size:.72rem;color:#a08880;background:#f2ece8;padding:8px;border-radius:8px}
+    .legend{max-width:340px;margin-top:12px;background:#fff;border:1px solid #e5ddd8;border-radius:12px;padding:12px;font-size:.78rem;color:#6a5248}
+    .notice{background:#f2ece8;padding:12px;border-radius:8px;color:#6a5248;margin-bottom:6px}
+    .details-lines{background:#fff;border:1px solid #f0e8e6;border-radius:8px;padding:10px;color:#6a5248;margin-top:6px}
+    .detail-service{font-weight:800;color:#3d2b1f;margin-bottom:6px}
+    .detail-meta{color:#6a5248}
+    .btn{flex:1;padding:10px;border-radius:8px;border:none;font-weight:700;cursor:pointer}
+    .btn.primary{background:#c9756c;color:#fff}
+    .btn.secondary{background:transparent;border:1px solid #e5ddd8}
+  </style>
+</head>
+<body>
+
+  <div class="phone">
+    <div class="screen">
+      <div class="app-bar">
+        <div class="logo">✂ Pop Salon</div>
+        <div class="step">Étape 3 / 4</div>
+      </div>
+
+      <div class="screen-body">
+        <!-- Slots screen (visible initially) -->
+        <div id="slots-screen">
+          <div>
+            <div class="screen-title">Choisissez un créneau</div>
+            <div class="screen-sub" id="service-sub">Chargement…</div>
+          </div>
+
+          <div class="month-picker">
+            <div class="month-actions">
+              <button id="prev-month">‹</button>
+            </div>
+            <div class="month-label" id="month-label">Mars 2026</div>
+            <div class="month-actions">
+              <button id="next-month">›</button>
+            </div>
+          </div>
+
+          <div class="note">Sélectionnez le mois souhaité ci‑dessous ; les plages disponibles s'affichent pour les jours avec un point.</div>
+
+          <div id="slots" class="slots"></div>
+
+          <div class="legend">
+            <div style="font-weight:700;color:#5c3d2e;margin-bottom:6px">Légende</div>
+            <div>- Boutons : réservables immédiatement dans le POC.</div>
+            <div>- Les horaires affichés sont simulés pour la démo.</div>
+          </div>
+        </div>
+
+        <!-- Confirmation screen (hidden until selection) -->
+        <div id="confirm-screen" style="display:none">
+          <div>
+            <div class="screen-title">Demande envoyée</div>
+            <div class="screen-sub" id="confirm-sub">Merci — votre demande a bien été enregistrée.</div>
+          </div>
+
+          <div class="notice" id="confirm-notice">La plage a été réservée pour approbation. Vous recevrez la confirmation par …</div>
+
+          <div class="small" id="confirm-details"></div>
+
+          <div style="display:flex;gap:8px;margin-top:auto">
+            <button class="btn primary" style="flex:1" onclick="goHome()">Accueil</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Simple mockup for Flow 03 — parse incoming service
+    function qs(name){const u=new URLSearchParams(location.search);return u.get(name)}
+    const service = qs('service') || 'Coloration';
+    const minutes = qs('minutes') || '';
+    document.getElementById('service-sub').textContent = service + (minutes ? (' — ' + minutes + ' min') : '');
+
+    // month state
+    const labelEl = document.getElementById('month-label');
+    let current = new Date();
+    current.setDate(1);
+
+    function fmtMonth(d){return d.toLocaleString('fr-FR',{month:'long',year:'numeric'})}
+
+    document.getElementById('prev-month').addEventListener('click',()=>{current.setMonth(current.getMonth()-1);renderMonth()});
+    document.getElementById('next-month').addEventListener('click',()=>{current.setMonth(current.getMonth()+1);renderMonth()});
+
+    // generate simulated availability for demo
+    function generateSlotsForMonth(d){
+      // returns an array of {date: '2026-03-05', dayLabel:'5 Mar', times:['09:00','11:30']}
+      const year = d.getFullYear();
+      const month = d.getMonth();
+      const out = [];
+      // for demo, mark 1st,3rd,5th,10th,12th of month
+      const sampleDays = [1,3,5,10,12,15,18,22];
+      sampleDays.forEach(day=>{
+        const dt = new Date(year,month,day);
+        const safe = new Date(dt);
+        if (safe.getMonth()===month) {
+          const times = [];
+          // simulate times based on day parity
+          if (day % 2 === 0) times.push('09:00','11:30','15:00');
+          else times.push('10:00','13:30','16:30');
+          out.push({date: safe.toISOString().slice(0,10), dayLabel: safe.toLocaleDateString('fr-FR',{weekday:'short',day:'numeric',month:'short'}), times});
+        }
+      });
+      return out;
+    }
+
+    function renderMonth(){
+      labelEl.textContent = fmtMonth(current);
+      const slotsContainer = document.getElementById('slots');
+      slotsContainer.innerHTML = '';
+      const days = generateSlotsForMonth(current);
+      days.forEach(d => {
+        const row = document.createElement('div'); row.className='day-row';
+        const header = document.createElement('div'); header.className='day-header';
+        header.innerHTML = '<div>'+d.dayLabel+'</div><div style="color:#8a7060;font-weight:600">'+d.date+'</div>';
+        row.appendChild(header);
+        const times = document.createElement('div'); times.className='times';
+        d.times.forEach(t=>{
+          const btn = document.createElement('button'); btn.className='time-btn small'; btn.textContent=t;
+          btn.addEventListener('click',()=>{selectSlot(d.date,t)});
+          times.appendChild(btn);
+        });
+        row.appendChild(times);
+        slotsContainer.appendChild(row);
+      });
+    }
+
+    function selectSlot(date,time){
+      // Show confirmation screen in-page (instead of navigating away)
+      const minutes = qs('minutes') || '';
+      const contact = qs('contact') || sessionStorage.getItem('pop_ident') || '';
+      const contactType = qs('contactType') || sessionStorage.getItem('pop_contactType') || '';
+
+      // Determine channel text
+      let channelText = 'par courriel ou texto';
+      if (contactType === 'phone') channelText = 'par texto';
+      else if (contactType === 'email') channelText = 'par courriel';
+
+      // Populate confirmation UI
+      const noticeEl = document.getElementById('confirm-notice');
+      const detailsEl = document.getElementById('confirm-details');
+      noticeEl.textContent = 'La plage a été réservée pour approbation. Vous recevrez la confirmation ' + channelText + '.';
+
+      const serviceDisplay = service && service.trim() ? service : 'Coloration';
+      const dateDisplay = date && date.trim() ? date : '—';
+      const timeDisplay = time && time.trim() ? time : '—';
+      // determine duration: prefer explicit minutes param, otherwise infer a default per service
+      function defaultMinutesForService(s){
+        const n = (s||'').toLowerCase();
+        if (n.includes('coupe')) return 45;
+        if (n.includes('color')) return 135;
+        if (n.includes('mise')) return 60;
+        if (n.includes('balayage')) return 120;
+        if (n.includes('brushing')) return 30;
+        return null;
+      }
+      const minutesDisplay = minutes && minutes.toString().trim() ? minutes : (defaultMinutesForService(serviceDisplay) || '—');
+      detailsEl.innerHTML = '<div class="details-lines">'
+        + '<div class="detail-service">' + serviceDisplay + '</div>'
+        + '<div class="detail-meta">' + (dateDisplay !== '—' ? ('Date : ' + dateDisplay) : '') + '</div>'
+        + '<div class="detail-meta">' + (timeDisplay !== '—' ? ('Heure : ' + timeDisplay) : '') + '</div>'
+        + '<div class="detail-meta">' + (minutesDisplay !== '—' ? ('Durée : ' + minutesDisplay + ' min') : '') + '</div>'
+        + '</div>';
+
+      // toggle screens
+      document.getElementById('slots-screen').style.display = 'none';
+      document.getElementById('confirm-screen').style.display = 'block';
+      // update app step
+      const stepEl = document.querySelector('.step'); if (stepEl) stepEl.textContent = 'Étape 4 / 4';
+    }
+
+    function backToSlots(){
+      document.getElementById('confirm-screen').style.display = 'none';
+      document.getElementById('slots-screen').style.display = 'block';
+      const stepEl = document.querySelector('.step'); if (stepEl) stepEl.textContent = 'Étape 3 / 4';
+      // ensure month view is visible
+      document.getElementById('month-label').scrollIntoView({behavior:'smooth'});
+    }
+
+    function goHome(){
+      // navigate to demo entry
+      window.location.href = 'flow-01-entree-demo.html';
+    }
+
+    // initial render
+    renderMonth();
+  </script>
+</body>
+</html>

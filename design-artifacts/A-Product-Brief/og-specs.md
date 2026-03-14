@@ -37,3 +37,23 @@ Bonnes pratiques et vérification:
 Notes pour l'équipe produit:
 
 - Ces spécifications sont des prérequis techniques pour la page web mobile cliente; elles ne doivent pas être affichées directement aux propriétaires des Pages Facebook. Les instructions pour la propriétaire (CTA, post épinglé) restent dans le flow coiffeuse, tandis que la configuration technique OG est gérée côté produit/site web.
+
+## Confirmation de réservation (Flow 04)
+
+Lorsqu'une cliente sélectionne une plage horaire, l'application crée une demande de rendez‑vous en statut *en attente d'approbation* (POC). Une notification est envoyée à la cliente selon la méthode d'identification utilisée au moment de la prise de rendez‑vous :
+
+- Si la cliente s'est identifiée avec un **numéro de téléphone** : envoyer une confirmation par **texto** (SMS) uniquement. Le message de l'interface doit afficher « Vous recevrez la confirmation par texto. »
+- Si la cliente s'est identifiée avec une **adresse courriel** et qu'aucun numéro de téléphone n'est disponible : envoyer la confirmation **par courriel**. Le message de l'interface doit afficher « Vous recevrez la confirmation par courriel. »
+
+Détection (POC) :
+- Si le champ d'identification contient un `@`, considérer comme `email`.
+- Sinon, si le champ contient des chiffres, considérer comme `phone`.
+- Priorité : si les deux sont fournis, le POC privilégie l'envoi par texto (phone).
+
+Exigences opérationnelles :
+- Le message envoyé contient : nom du salon, service demandé, date et heure demandée, et un lien pour consulter l'état de la demande.
+- Le statut initial est `pending` / `en_attente`; l'approbation finale est effectuée via l'interface propriétaire (flow coiffeuse). Après approbation, envoyer la confirmation finale par le même canal.
+
+Tests et validations :
+- Vérifier l'affichage conditionnel du texte de confirmation dans les mockups (Flow 04).
+- Tester l'envoi simulé (POC) en variant `contactType` entre `phone` et `email`.
