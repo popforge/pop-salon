@@ -55,15 +55,11 @@ flowchart TD
 - Testez ces chemins : le bouton CTA, le lien dans « À propos », le lien depuis le post épinglé.
 - Si tout ouvre la page de réservation, c’est bon.
 
-5) Si le lien n'affiche pas un aperçu propre sur Facebook
-- Ajoutez (ou demandez à la personne qui gère le site) des balises Open Graph sur la page cible pour un bel aperçu :
+5) Prérequis technique (pour l'équipe produit)
 
-```html
-<meta property="og:title" content="Pop Salon — Prendre rendez‑vous" />
-<meta property="og:description" content="Prenez rendez‑vous en ligne en quelques clics — pas de compte requis." />
-<meta property="og:image" content="https://popforge.github.io/pop-salon/assets/og-flow02-1200x630.png" />
-<meta property="og:url" content="https://popforge.github.io/pop-salon/client/flow-02-identification.html" />
-```
+- Les balises Open Graph sont une exigence technique pour que les aperçus partagés fonctionnent correctement. Ces métadonnées doivent être ajoutées côté page web cliente (HTML côté serveur) — elles ne sont pas affichées au propriétaire de la Page Facebook.
+- Voir la spécification détaillée: `design-artifacts/A-Product-Brief/og-specs.md`.
+La coiffeuse propriétaire aimerait peut-être pouvoir configurer le contenu de ces balises pour une expérience plus personalisé. Ceci serait à prévoir dans une V1 mais pas pour la MVP.
 
 6) Notes et recommandations
 - Préférez un visuel chaleureux (photo réelle) pour le post ; ajoutez une petite bande texte sur l'image « Prendre rendez‑vous ».
@@ -75,7 +71,7 @@ flowchart TD
 - [ ] URL collée dans « À propos »
 - [ ] Post visuel créé et épinglé
 - [ ] Test mobile effectué (CTA / post / À propos)
-- [ ] OG tags ajoutés si aperçu souhaité
+- [ ] OG tags ajoutés (géré côté produit, voir `A-Product-Brief/og-specs.md`)
 
 ---
 

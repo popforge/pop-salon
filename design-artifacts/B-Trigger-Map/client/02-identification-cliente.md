@@ -33,3 +33,15 @@ flowchart TD
 - Le mockup (voir le lien ci‑dessus) affiche un message de bienvenue personnalisé lorsque le prénom est disponible (ex. « Bonjour, Marie ! ») et affiche les durées habituelles par service dans la fiche cliente.
 - Heuristique d'exemple implémentée dans le mockup : si l'entrée contient des chiffres ou un « @ », traiter comme cliente reconnue et afficher le chemin « cliente reconnue » ; sinon afficher le chemin « nouvelle cliente ».
 - Pour rester synchronisés : lorsque vous mettez à jour un mockup de l'écran d'identification, ajoutez un bref résumé des changements ici (texte affiché, règles heuristiques, numéros d'exemple). Cela garantit que la carte de triggers reflète le comportement visuel.
+
+## Exigences non fonctionnelles / partage social
+La page publique de réservation doit inclure des balises Open Graph minimales afin que le lien partagé sur Facebook affiche un aperçu propre (titre, description, image, URL canonique).
+
+- og:title
+- og:description
+- og:image
+- og:url
+- éventuellement og:site_name
+- éventuellement og:type=website
+
+Le contenu de ces balises pourrait être personnalisable via l'application de coiffeuse.
