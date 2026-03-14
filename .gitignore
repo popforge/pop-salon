@@ -1,0 +1,116 @@
+# --------------------------------------------------
+# OS / fichiers temporaires
+# --------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+
+# --------------------------------------------------
+# Logs
+# --------------------------------------------------
+*.log
+logs/
+*.pid
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --------------------------------------------------
+# Variables d'environnement / secrets locaux
+# --------------------------------------------------
+.env
+.env.*
+!.env.example
+!.env.template
+*.local
+secrets.*
+
+# --------------------------------------------------
+# Visual Studio Code
+# --------------------------------------------------
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/*.code-snippets
+.history/
+
+# --------------------------------------------------
+# Visual Studio / .NET / C#
+# --------------------------------------------------
+.vs/
+[Bb]in/
+[Oo]bj/
+out/
+TestResults/
+*.user
+*.rsuser
+*.suo
+*.cache
+*.nupkg
+*.snupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# --------------------------------------------------
+# Node / Front-end
+# --------------------------------------------------
+node_modules/
+dist/
+build/
+coverage/
+.next/
+.nuxt/
+.svelte-kit/
+.parcel-cache/
+.vite/
+*.tsbuildinfo
+
+# --------------------------------------------------
+# BMAD / agents / runtime state
+# --------------------------------------------------
+_bmad/_memory/
+_bmad/_memory/**
+_bmad/**/.cache/
+_bmad/**/tmp/
+_bmad/**/temp/
+_bmad/**/*.log
+
+# Conserver les fichiers de configuration personnalisés si présents
+!_bmad/_config/
+!_bmad/_config/agents/
+!_bmad/_config/agents/*.customize.yaml
+
+# Ignorer la documentation générée des agents/prompts si régénérable
+.github/agents/*.agent.md
+.github/prompts/*.prompt.md
+
+# --------------------------------------------------
+# Packages / dépendances diverses
+# --------------------------------------------------
+packages/*/dist/
+packages/*/build/
+
+# --------------------------------------------------
+# Fichiers de test / rapports
+# --------------------------------------------------
+coverage-final.json
+*.coverage
+*.lcov
+
+# --------------------------------------------------
+# Archives
+# --------------------------------------------------
+*.zip
+*.tar
+*.gz
+*.7z
+*.rar
