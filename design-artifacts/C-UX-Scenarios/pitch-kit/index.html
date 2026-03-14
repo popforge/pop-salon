@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pop Salon — Pitch POC Rendez-vous</title>
+  <style>
+    :root {
+      --bg: #f6f1ed;
+      --card: #ffffff;
+      --ink: #2c1f17;
+      --muted: #6f5b50;
+      --brand: #c9756c;
+      --brand-dark: #ae5d55;
+      --ok: #6f9f70;
+      --line: #eaded7;
+      --soft: #f3e8e3;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, #fbe9dd 0%, transparent 35%),
+        radial-gradient(circle at 90% 30%, #f4dbd6 0%, transparent 30%),
+        var(--bg);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    .container {
+      width: min(980px, 92vw);
+      margin: 0 auto;
+      padding: 24px 0 56px;
+    }
+
+    .hero {
+      background: linear-gradient(140deg, #d48177 0%, #c9756c 55%, #b8645b 100%);
+      color: #fff;
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 16px 40px rgba(120, 63, 58, 0.24);
+      margin-bottom: 18px;
+    }
+
+    .hero .kicker {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      opacity: 0.88;
+    }
+
+    .hero h1 {
+      margin-top: 8px;
+      font-size: clamp(1.45rem, 3.8vw, 2.2rem);
+      line-height: 1.18;
+    }
+
+    .hero p {
+      margin-top: 12px;
+      max-width: 60ch;
+      opacity: 0.94;
+      font-size: 0.98rem;
+    }
+
+    .hero-actions {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 0;
+      border-radius: 12px;
+      padding: 11px 14px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: transform 0.18s ease, opacity 0.18s ease, background 0.18s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn.primary {
+      background: #fff;
+      color: var(--brand-dark);
+    }
+
+    .btn.ghost {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 8px 20px rgba(66, 33, 29, 0.06);
+    }
+
+    .card h2 {
+      font-size: 1.04rem;
+      margin-bottom: 8px;
+    }
+
+    .card h3 {
+      font-size: 0.94rem;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+
+    .card p, .card li {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .span-12 { grid-column: span 12; }
+    .span-6 { grid-column: span 6; }
+    .span-4 { grid-column: span 4; }
+
+    .list {
+      display: grid;
+      gap: 7px;
+      margin-top: 6px;
+      padding-left: 18px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .step {
+      border: 1px dashed #e7d4cc;
+      background: #fcf8f6;
+      border-radius: 12px;
+      padding: 10px 11px;
+    }
+
+    .step strong { color: var(--ink); }
+
+    .before-after {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .box {
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      padding: 12px;
+      background: #fff;
+    }
+
+    .box.before {
+      background: #fff7f5;
+      border-color: #f0d5cb;
+    }
+
+    .box.after {
+      background: #f3faf0;
+      border-color: #d6e9cf;
+    }
+
+    .pill {
+      display: inline-block;
+      font-size: 0.73rem;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 4px 10px;
+      margin-bottom: 8px;
+    }
+
+    .pill.red { background: #fde4dc; color: #954a42; }
+    .pill.green { background: #dcf0d4; color: #486e48; }
+
+    .kpi {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .kpi .item {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      padding: 10px;
+    }
+
+    .kpi .item strong {
+      display: block;
+      color: var(--ink);
+      font-size: 0.85rem;
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+
+    .kpi .item span {
+      color: var(--muted);
+      font-size: 0.78rem;
+      line-height: 1.3;
+    }
+
+    .cta-band {
+      margin-top: 16px;
+      background: linear-gradient(140deg, #7aa980 0%, #5f8f68 100%);
+      color: #fff;
+      border-radius: 16px;
+      padding: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .cta-band p {
+      font-size: 0.92rem;
+      opacity: 0.95;
+    }
+
+    .cta-band .btn {
+      background: #fff;
+      color: #3f6b45;
+    }
+
+    .muted-note {
+      margin-top: 12px;
+      color: #8e7a6f;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 900px) {
+      .span-6, .span-4 { grid-column: span 12; }
+      .kpi { grid-template-columns: 1fr 1fr; }
+      .before-after { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 520px) {
+      .container { width: 94vw; }
+      .hero { padding: 18px; border-radius: 16px; }
+      .card { border-radius: 14px; }
+      .kpi { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="hero">
+      <div class="kicker">Pop Salon · Pitch POC</div>
+      <h1>Un système de rendez-vous fait pour ta réalité de coiffeuse autonome</h1>
+      <p>
+        Cette présentation se lit en 8 à 10 minutes. L'objectif est simple : réduire les allers-retours, garder ton contrôle sur l'agenda, et te faire gagner du temps mental chaque semaine.
+      </p>
+      <div class="hero-actions">
+        <a class="btn primary" href="../client/flow-02-identification.html" target="_blank" rel="noopener noreferrer">Voir la démo d'identification</a>
+        <a class="btn ghost" href="./01-script-pitch.md" target="_blank" rel="noopener noreferrer">Lire le script complet</a>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>Le problème qu'on veut régler maintenant</h2>
+        <ul class="list">
+          <li>Trop de textos avant de trouver une plage qui fonctionne.</li>
+          <li>Confirmations parfois floues, erreurs de prise en note.</li>
+          <li>No-shows qui grugent ton temps et ta rentabilité.</li>
+          <li>Réalité coiffure mal gérée par les agendas génériques.</li>
+        </ul>
+      </article>
+
+      <article class="card span-6">
+        <h2>La promesse du POC</h2>
+        <ul class="list">
+          <li>Demande autonome côté cliente (téléphone/courriel).</li>
+          <li>Validation manuelle côté coiffeuse : tu gardes le contrôle.</li>
+          <li>Plages proposées selon durée habituelle ou durée par défaut.</li>
+          <li>Confirmation claire et rappels automatiques.</li>
+        </ul>
+      </article>
+
+      <article class="card span-12">
+        <h2>Avant / Après</h2>
+        <div class="before-after">
+          <div class="box before">
+            <span class="pill red">Avant</span>
+            <p>
+              6 à 8 messages pour fixer un rendez-vous, avec beaucoup d'allers-retours et des risques d'erreur.
+            </p>
+          </div>
+          <div class="box after">
+            <span class="pill green">Après</span>
+            <p>
+              La cliente fait sa demande, tu valides, le système confirme et rappelle automatiquement.
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <article class="card span-6">
+        <h2>Parcours en 4 étapes</h2>
+        <div class="timeline">
+          <div class="step"><strong>1.</strong> La cliente ouvre le lien et s'identifie (téléphone ou courriel).</div>
+          <div class="step"><strong>2.</strong> Le système reconnaît le profil ou crée un profil temporaire.</div>
+          <div class="step"><strong>3.</strong> Les plages sont calculées selon les durées pertinentes.</div>
+          <div class="step"><strong>4.</strong> Tu valides la demande; confirmation et rappels sont envoyés.</div>
+        </div>
+      </article>
+
+      <article class="card span-6">
+        <h2>Ce qui n'est pas dans ce POC</h2>
+        <ul class="list">
+          <li>Pas d'inventaire complet dans cette phase.</li>
+          <li>Pas de moteur de prix avancé dans cette phase.</li>
+          <li>Pas de comptabilité complète dans cette phase.</li>
+          <li>Objectif : valider d'abord la valeur sur les rendez-vous.</li>
+        </ul>
+      </article>
+
+      <article class="card span-12">
+        <h2>Mesures à suivre pendant l'essai</h2>
+        <div class="kpi">
+          <div class="item"><strong>Taux autonome</strong><span>% de demandes faites sans intervention manuelle initiale.</span></div>
+          <div class="item"><strong>Nb d'échanges</strong><span>Messages moyens avant confirmation d'un rendez-vous.</span></div>
+          <div class="item"><strong>Délai de confirmation</strong><span>Temps moyen entre demande et validation.</span></div>
+          <div class="item"><strong>No-show</strong><span>Évolution avant/après rappels automatiques.</span></div>
+          <div class="item"><strong>Adoption canal</strong><span>Répartition Facebook, lien direct, SMS, Messenger, téléphone.</span></div>
+        </div>
+      </article>
+
+      <article class="card span-12">
+        <h2>Ton feedback (3 questions)</h2>
+        <ol class="list">
+          <li>Qu'est-ce qui te semble le plus utile dans ce parcours ?</li>
+          <li>Qu'est-ce qui est encore flou ou trop compliqué ?</li>
+          <li>Est-ce que tu te verrais l'utiliser chaque semaine ?</li>
+        </ol>
+        <p class="muted-note">Tu peux répondre par texto ou Messenger en quelques lignes.</p>
+      </article>
+    </section>
+
+    <section class="cta-band">
+      <div>
+        <strong>Prête à me donner ton avis ?</strong>
+        <p>Regarde la démo, puis réponds aux 3 questions. Ton feedback guide la suite du produit.</p>
+      </div>
+      <a class="btn" href="../client/flow-02-identification.html" target="_blank" rel="noopener noreferrer">Ouvrir la démo</a>
+    </section>
+  </main>
+</body>
+</html>
