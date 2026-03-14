@@ -79,6 +79,30 @@ Valeur promise :
 
 ## 7. Portée du POC
 
+Le POC couvre explicitement deux volets complémentaires.
+
+### 7.1 Volet cliente
+
+Le volet cliente couvre :
+
+- l'accès autonome à une demande de rendez-vous ;
+- l'identification de la cliente par numéro de téléphone ou courriel ;
+- la sélection du service demandé ;
+- la proposition de plages compatibles ;
+- la soumission d'une demande à valider ;
+- la réception de confirmation et de rappels.
+
+### 7.2 Volet coiffeuse
+
+Le volet coiffeuse couvre :
+
+- la gestion de la liste de clientes ;
+- la consultation et l'édition des durées habituelles par cliente et par service ;
+- la configuration des plages où le salon est ouvert et où la coiffeuse est disponible ;
+- la validation des demandes ;
+- la visualisation des plages déjà réservées ;
+- la gestion des conflits et alternatives de plages.
+
 ### Inclus
 
 - fiche cliente minimale ;
@@ -109,17 +133,29 @@ Valeur promise :
 Le système doit permettre de :
 
 - créer une fiche cliente ;
+- associer un identifiant principal de contact (numéro de téléphone et/ou courriel) ;
 - associer un historique minimal de services ;
 - associer une durée habituelle estimée par type de service ;
 - identifier une cliente comme nouvelle ou existante.
+
+Pour le POC, les types de service de base sont :
+
+- coupe ;
+- coloration ;
+- mise en plis ;
+- premier rendez-vous ;
+- autre.
 
 ### 8.2 Demande de rendez-vous
 
 Le système doit permettre à une cliente de :
 
+- s'identifier avec un numéro de téléphone ou un courriel ;
 - demander un rendez-vous pour un mois ou une période donnée ;
 - choisir un service demandé ;
-- recevoir des disponibilités compatibles avec son profil ou, pour une nouvelle cliente, avec une durée par défaut.
+- recevoir des disponibilités compatibles calculées selon la règle suivante :
+	- cliente existante : durée habituelle enregistrée dans sa fiche pour le service choisi ;
+	- nouvelle cliente : durée par défaut définie pour le service choisi.
 
 ### 8.3 Validation et confirmation
 
@@ -136,16 +172,65 @@ Le système doit être capable de :
 
 - distinguer différents types de services ;
 - représenter une durée variable selon la cliente ;
+- utiliser des durées par défaut par type de service lorsqu'aucun historique client n'existe ;
 - modéliser un temps de pause pour certains services de coloration ;
 - autoriser certaines combinaisons de rendez-vous en parallèle pendant les pauses, selon des règles définies.
 
-### 8.5 Réduction des absences
+### 8.5 Interface coiffeuse (agenda et disponibilités)
+
+Le système doit permettre à la coiffeuse de :
+
+- consulter sa liste de clientes et leurs durées habituelles par service ;
+- modifier les durées habituelles lorsqu'une cliente prend plus ou moins de temps ;
+- définir ses plages d'ouverture et de disponibilité (jours et heures) ;
+- bloquer des périodes indisponibles (pause, obligation personnelle, congé) ;
+- visualiser clairement les plages libres et les plages réservées.
+
+### 8.6 Réduction des absences
 
 Le système doit permettre de :
 
 - envoyer des rappels automatiques ;
 - limiter les erreurs de prise en note côté cliente ;
 - garder une trace des rendez-vous manqués pour usage futur.
+
+### 8.7 Canaux d'entrée et autonomie de demande
+
+Le système doit permettre une demande de rendez-vous autonome via un canal principal unique, puis des canaux relais qui redirigent vers ce même parcours.
+
+Canal principal :
+
+- une page web mobile de demande de rendez-vous (sans application à installer) ;
+- un lien unique, stable et facile à partager.
+
+Canaux relais (POC prioritaire + extension) :
+
+- bouton ou lien visible sur Facebook/Instagram/Google Business Profile ;
+- réponse automatique Messenger qui renvoie vers le lien unique ;
+- option SMS avec mot-clé ou message initial client, renvoyant vers le lien unique ;
+- maintien d'une option téléphone pour la clientèle peu technophile.
+
+Règle produit clé :
+
+- tous les canaux d'entrée convergent vers le même flux de demande, afin de réduire la complexité opérationnelle.
+
+Critères d'acceptation (POC) :
+
+- une cliente peut soumettre une demande complète sans intervention manuelle préalable de la coiffeuse ;
+- le lien de demande est accessible depuis au moins trois points d'entrée publics (ex. Facebook, Google Business Profile, QR code) ;
+- un message reçu sur Messenger peut déclencher une réponse automatique contenant le lien de demande ;
+- la source d'entrée (web direct, Facebook, Messenger, SMS, téléphone assisté) est enregistrée pour analyse ;
+- le flux fonctionne sur mobile en moins de 5 étapes jusqu'à la soumission de la demande.
+
+### 8.8 Gestion des réservations et prévention des conflits
+
+Le système doit :
+
+- conserver en mémoire les demandes confirmées et les plages réservées ;
+- empêcher la proposition d'une plage déjà occupée ;
+- vérifier la compatibilité entre durée requise, disponibilité coiffeuse et règles de parallélisation ;
+- marquer une demande comme en attente, acceptée, refusée, ou proposée en alternative ;
+- proposer des alternatives lorsqu'une plage demandée n'est plus disponible.
 
 ## 9. Exigences non fonctionnelles
 
@@ -246,6 +331,19 @@ Le POC sera considéré utile s’il permet de démontrer les points suivants :
 - compréhension des cas de coloration avec temps de pause ;
 - perception d’un gain de temps réel par la coiffeuse ;
 - intérêt confirmé pour poursuivre vers une version élargie.
+
+Le POC est considéré complet seulement si les deux volets sont couverts :
+
+- volet cliente : demande autonome avec identification et proposition de plages ;
+- volet coiffeuse : gestion des disponibilités, validation des demandes et consultation des réservations.
+
+Indicateurs chiffrés à suivre pendant le POC :
+
+- taux d'utilisation du canal autonome (part des demandes soumises sans intervention manuelle initiale) ;
+- nombre moyen d'échanges avant confirmation ;
+- délai moyen entre demande et confirmation ;
+- taux de no-show avant et après rappels ;
+- répartition des demandes par canal d'entrée.
 
 ## 14. Risques principaux
 
