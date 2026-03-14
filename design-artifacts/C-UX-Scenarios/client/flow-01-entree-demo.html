@@ -16,6 +16,9 @@
     pre{background:#f2f0ee;padding:10px;border-radius:8px}
     .modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center}
     .modal .box{background:#fff;padding:18px;border-radius:10px;max-width:560px;width:92%}
+    /* Facebook image + simulated CTA */
+    .fb-post { position: relative; display: inline-block; }
+    .fb-post img { display: block; max-width: 140px; height: auto; border-radius:8px; }
   </style>
 </head>
 <body>
@@ -39,8 +42,15 @@
 
       <div class="card">
         <strong>Facebook / Instagram</strong>
-        <div style="margin-top:10px;"><button onclick="goToRequest('social')">Ouvrir via post (simulé)</button></div>
-        <div class="small">Clique sur le post → navigateur → page de demande.</div>
+        <div style="margin-top:10px; display:flex; gap:12px; align-items:center;">
+          <div class="fb-post" style="border:1px solid #e6ded8; padding:6px; border-radius:8px; background:#fff;">
+            <img src="assets/facebook-cta-sample.png" alt="Apercu post Facebook - Prendre rendez-vous" />
+          </div>
+          <div>
+            <div><button onclick="goToRequest('social')">Ouvrir via post (simulé)</button></div>
+            <div class="small">Clique sur le post → navigateur → page de demande.</div>
+          </div>
+        </div>
       </div>
 
       <div class="card">
