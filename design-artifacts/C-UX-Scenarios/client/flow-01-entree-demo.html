@@ -27,8 +27,8 @@
       <div class="card">
         <strong>Lien direct / QR</strong>
         <div style="margin-top:10px; display:flex; gap:12px; align-items:center;">
-          <a href="https://popforge.github.io/pop-salon/design-artifacts/C-UX-Scenarios/client/flow-02-identification.html" target="_blank" rel="noopener noreferrer" title="Ouvrir la page de demande">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fpopforge.github.io%2Fpop-salon%2Fdesign-artifacts%2FC-UX-Scenarios%2Fclient%2Fflow-02-identification.html" alt="QR code vers la page de demande" style="width:80px;height:80px;border-radius:8px;border:1px solid #e6ded8;"/>
+          <a href="flow-02-identification.html" target="_blank" rel="noopener noreferrer" title="Ouvrir la page de demande">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fpopforge.github.io%2Fpop-salon%2Fclient%2Fflow-02-identification.html" alt="QR code vers la page de demande" style="width:80px;height:80px;border-radius:8px;border:1px solid #e6ded8;"/>
           </a>
           <div>
             <div><button onclick="goToRequest('direct')">Ouvrir la page de demande</button></div>
@@ -72,7 +72,7 @@
 
     <div class="card">
       <strong>Notes</strong>
-      <p class="small">La page de demande utilisée ici est : <a href="https://popforge.github.io/pop-salon/design-artifacts/C-UX-Scenarios/client/flow-02-identification.html" target="_blank">flow-02-identification.html</a></p>
+      <p class="small">La page de demande utilisée ici est : <a href="flow-02-identification.html" target="_blank">flow-02-identification.html</a></p>
       <p class="small">Utilisez cette démo pour vérifier que les canaux convergent vers la même URL et pour valider les textes et règles avant mise en production.</p>
     </div>
   </div>
@@ -80,7 +80,7 @@
   <script>
     function goToRequest(from){
       // for demo open the Flow 02 mockup in a new tab (public URL)
-      window.open('https://popforge.github.io/pop-salon/design-artifacts/C-UX-Scenarios/client/flow-02-identification.html','_blank');
+      window.open('flow-02-identification.html','_blank');
     }
     function simulateBot(kind){
       showModal(kind==='messenger' ?
@@ -92,7 +92,7 @@
     }
     function showModal(text){
       const modal = document.createElement('div'); modal.className='modal';
-      modal.innerHTML = `<div class="box"><p>${text}</p><p style="margin-top:12px"><a href="https://popforge.github.io/pop-salon/design-artifacts/C-UX-Scenarios/client/flow-02-identification.html" target="_blank">Ouvrir la page de demande</a></p><p style="margin-top:12px;text-align:right"><button onclick="document.body.removeChild(this.closest('.modal'))">Fermer</button></p></div>`;
+      modal.innerHTML = `<div class="box"><p>${text}</p><p style="margin-top:12px"><a href="flow-02-identification.html" target="_blank">Ouvrir la page de demande</a></p><p style="margin-top:12px;text-align:right"><button onclick="document.body.removeChild(this.closest('.modal'))">Fermer</button></p></div>`;
       document.body.appendChild(modal);
     }
   </script>
