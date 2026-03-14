@@ -86,12 +86,18 @@ _bmad/**/*.log
 
 # Conserver les fichiers de configuration personnalisés si présents
 !_bmad/_config/
-!_bmad/_config/agents/
+#!_bmad/_config/agents/
+_bmad/_config/agents/
+_bmad/bmm/
+_bmad/cis/
+_bmad/core/
+_bmad/tea/
 !_bmad/_config/agents/*.customize.yaml
 
 # Ignorer la documentation générée des agents/prompts si régénérable
 .github/agents/*.agent.md
 .github/prompts/*.prompt.md
+.github/skills/bmad-*
 
 # --------------------------------------------------
 # Packages / dépendances diverses
