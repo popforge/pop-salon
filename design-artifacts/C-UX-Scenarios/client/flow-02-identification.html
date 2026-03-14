@@ -326,7 +326,7 @@
   </div>
 
   <!-- Path selector -->
-  <div class="path-selector">
+    <div class="path-selector">
     <button class="active" onclick="setPath('returning')">Cliente existante</button>
     <button onclick="setPath('new')">Nouvelle cliente</button>
   </div>
@@ -334,61 +334,29 @@
   <!-- ══ SCREENS ROW ══ -->
   <div class="screens-row">
 
-    <!-- ── Écran 1 : Accueil ── -->
+    <!-- ── Écran 1 : Accueil + Identification ── -->
     <div class="phone-wrap">
       <span class="screen-label">Écran 1 · Accueil</span>
       <div class="phone">
         <div class="screen">
           <div class="app-bar">
             <span class="logo">✂ Pop Salon</span>
-            <span class="step-indicator">Étape 1 / 4</span>
+            <span class="step-indicator">Étape 1 / 3</span>
           </div>
           <div class="screen-body">
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; text-align:center;">
-              <div style="font-size:2.8rem;">✂️</div>
-              <div class="screen-title" style="font-size:1.15rem;">Prenez rendez-vous<br/>en quelques clics</div>
-              <div class="screen-subtitle" style="text-align:center">
-                Pas de compte requis.<br/>Entrez votre numéro ou courriel<br/>pour commencer.
+            <div style="display:flex; flex-direction:column; gap:12px;">
+              <div class="screen-title">Prenez rendez-vous en quelques clics</div>
+              <div class="screen-subtitle">Aucun compte requis — entrez votre numéro ou courriel pour voir vos disponibilités.</div>
+
+              <div>
+                <div class="field-label">Numéro de téléphone ou adresse courriel</div>
+                <input id="ident-input" class="field-input" type="text" placeholder="819 555-1234 ou exemple@courriel.com" />
               </div>
+
+              <div class="note" style="display:none;">&nbsp;</div>
+
+              <button class="btn-primary" onclick="onContinue()" style="margin-top:6px">Continuer →</button>
             </div>
-            <button class="btn-primary">Prendre un rendez-vous</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="arrow">→</div>
-
-    <!-- ── Écran 2 : Identification ── -->
-    <div class="phone-wrap">
-      <span class="screen-label">Écran 2 · Identification</span>
-      <div class="phone">
-        <div class="screen">
-          <div class="app-bar">
-            <span class="logo">✂ Pop Salon</span>
-            <span class="step-indicator">Étape 2 / 4</span>
-          </div>
-          <div class="screen-body">
-            <div class="screen-title">Identifiez-vous</div>
-            <div class="screen-subtitle">Aucun mot de passe requis. Nous utilisons votre numéro ou courriel pour retrouver votre profil.</div>
-
-            <div>
-              <div class="field-label">Numéro de téléphone</div>
-              <input class="field-input filled" type="tel" value="819 555-1234" readonly />
-            </div>
-
-            <div class="divider-or"><span>ou</span></div>
-
-            <div>
-              <div class="field-label">Adresse courriel</div>
-              <input class="field-input" type="email" placeholder="example@courriel.com" readonly />
-            </div>
-
-            <div class="note">
-              <strong>Pourquoi ?</strong> Cela nous permet d'afficher des disponibilités adaptées à votre historique de visites.
-            </div>
-
-            <button class="btn-primary" style="margin-top:auto">Continuer →</button>
           </div>
         </div>
       </div>
@@ -403,7 +371,7 @@
         <div class="screen">
           <div class="app-bar">
             <span class="logo">✂ Pop Salon</span>
-            <span class="step-indicator">Étape 3 / 4</span>
+            <span class="step-indicator">Étape 2 / 3</span>
           </div>
           <div class="screen-body">
             <div class="welcome-banner">
@@ -440,7 +408,7 @@
         <div class="screen">
           <div class="app-bar">
             <span class="logo">✂ Pop Salon</span>
-            <span class="step-indicator">Étape 3 / 4</span>
+            <span class="step-indicator">Étape 2 / 3</span>
           </div>
           <div class="screen-body">
             <div class="welcome-banner new-client">
@@ -483,11 +451,31 @@
   </div>
 
   <script>
-    function setPath(path) {
+    function setPath(path, btn) {
+      // update active button
       document.querySelectorAll('.path-selector button').forEach(b => b.classList.remove('active'));
-      event.target.classList.add('active');
+      if (btn instanceof Element) btn.classList.add('active');
+      else {
+        const labels = { returning: 'Cliente existante', new: 'Nouvelle cliente' };
+        document.querySelectorAll('.path-selector button').forEach(b => {
+          if (b.textContent.trim() === labels[path]) b.classList.add('active');
+        });
+      }
+      // show path content
       document.querySelectorAll('.path-content').forEach(el => el.classList.remove('visible'));
-      document.getElementById('path-' + path).classList.add('visible');
+      const el = document.getElementById('path-' + path);
+      if (el) el.classList.add('visible');
+    }
+
+    function onContinue() {
+      const v = document.getElementById('ident-input').value.trim();
+      if (!v) { alert('Veuillez entrer votre numéro de téléphone ou votre courriel.'); return; }
+      // Simple demo heuristic: if input contains digits or '@' treat as returning client
+      const isReturning = /\d/.test(v) || v.indexOf('@') !== -1;
+      setPath(isReturning ? 'returning' : 'new');
+      // scroll to the profile block
+      const target = document.getElementById('path-' + (isReturning ? 'returning' : 'new'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
     }
   </script>
 </body>
