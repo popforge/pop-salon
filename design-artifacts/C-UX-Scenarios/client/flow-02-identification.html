@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mockup — Flow 02 : Identification cliente</title>
+  <style>
+    /* ── Page layout ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #f0ebe6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 16px 64px;
+      gap: 48px;
+    }
+
+    /* ── Page header ── */
+    .page-header {
+      text-align: center;
+    }
+    .page-header h1 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #5c3d2e;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .page-header p {
+      font-size: .85rem;
+      color: #8a7060;
+      margin-top: 4px;
+    }
+
+    /* ── Flow path selector ── */
+    .path-selector {
+      display: flex;
+      gap: 8px;
+      background: #e3d9d0;
+      border-radius: 30px;
+      padding: 4px;
+    }
+    .path-selector button {
+      border: none;
+      background: transparent;
+      padding: 6px 18px;
+      border-radius: 26px;
+      font-size: .8rem;
+      font-weight: 600;
+      color: #7a6255;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .path-selector button.active {
+      background: #c9756c;
+      color: #fff;
+    }
+
+    /* ── Screens row ── */
+    .screens-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 32px;
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    /* ── Phone frame ── */
+    .phone-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .screen-label {
+      font-size: .75rem;
+      font-weight: 700;
+      color: #8a7060;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .phone {
+      width: 320px;
+      height: 620px;
+      background: #1c1c1e;
+      border-radius: 44px;
+      padding: 14px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+      position: relative;
+    }
+    /* notch */
+    .phone::before {
+      content: '';
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90px;
+      height: 24px;
+      background: #1c1c1e;
+      border-radius: 0 0 16px 16px;
+      z-index: 10;
+    }
+    .screen {
+      width: 100%;
+      height: 100%;
+      background: #faf7f5;
+      border-radius: 32px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── App chrome ── */
+    .app-bar {
+      background: #c9756c;
+      color: #fff;
+      padding: 36px 18px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .app-bar .logo {
+      font-size: .95rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+    }
+    .app-bar .step-indicator {
+      font-size: .7rem;
+      opacity: .75;
+    }
+
+    /* ── Screen body ── */
+    .screen-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .screen-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #3d2b1f;
+    }
+    .screen-subtitle {
+      font-size: .78rem;
+      color: #7a6255;
+      line-height: 1.5;
+      margin-top: -8px;
+    }
+
+    /* ── Form elements ── */
+    .field-label {
+      font-size: .72rem;
+      font-weight: 600;
+      color: #7a6255;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: 4px;
+    }
+    .field-input {
+      width: 100%;
+      border: 1.5px solid #d9cec8;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: .85rem;
+      color: #3d2b1f;
+      background: #fff;
+      outline: none;
+    }
+    .field-input::placeholder { color: #b8a99e; }
+    .field-input:focus { border-color: #c9756c; }
+    .field-input.filled { border-color: #aac5a0; background: #f5faf4; }
+
+    .divider-or {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 2px 0;
+    }
+    .divider-or::before, .divider-or::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #e0d6d0;
+    }
+    .divider-or span {
+      font-size: .7rem;
+      color: #b8a99e;
+      font-weight: 600;
+    }
+
+    /* ── Note ── */
+    .note {
+      font-size: .72rem;
+      color: #a08880;
+      line-height: 1.5;
+      background: #f2ece8;
+      border-radius: 8px;
+      padding: 8px 10px;
+    }
+    .note strong { color: #7a6255; }
+
+    /* ── Profile card ── */
+    .profile-card {
+      background: #fff;
+      border: 1.5px solid #e5ddd8;
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .profile-card .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #e8c4bf;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #c9756c;
+      margin-bottom: 4px;
+    }
+    .profile-card .name {
+      font-size: .9rem;
+      font-weight: 700;
+      color: #3d2b1f;
+    }
+    .profile-card .meta {
+      font-size: .72rem;
+      color: #8a7060;
+    }
+    .profile-card .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 4px;
+    }
+    .tag {
+      background: #f0e8e6;
+      color: #c9756c;
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-size: .68rem;
+      font-weight: 600;
+    }
+    .tag.green { background: #edf5ea; color: #5a8f5a; }
+
+    /* ── Welcome banner ── */
+    .welcome-banner {
+      background: linear-gradient(135deg, #c9756c 0%, #e09b8a 100%);
+      color: #fff;
+      border-radius: 12px;
+      padding: 14px;
+    }
+    .welcome-banner .greeting {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .welcome-banner .sub {
+      font-size: .75rem;
+      opacity: .85;
+      margin-top: 3px;
+      line-height: 1.4;
+    }
+    .welcome-banner.new-client {
+      background: linear-gradient(135deg, #7aab80 0%, #a5c9a8 100%);
+    }
+
+    /* ── CTA button ── */
+    .btn-primary {
+      width: 100%;
+      background: #c9756c;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 13px;
+      font-size: .88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .2s;
+      margin-top: auto;
+    }
+    .btn-primary:hover { background: #b5635a; }
+    .btn-primary.green { background: #5a8f5a; }
+    .btn-primary.green:hover { background: #4a7a4a; }
+
+    /* ── Arrow connector ── */
+    .arrow {
+      align-self: center;
+      font-size: 1.6rem;
+      color: #b8a99e;
+      margin-top: 28px;
+    }
+
+    /* ── Path hidden ── */
+    .path-content { display: none; }
+    .path-content.visible { display: contents; }
+
+    /* ── Annotation ── */
+    .annotation {
+      font-size: .72rem;
+      color: #b8a99e;
+      text-align: center;
+      font-style: italic;
+      margin-top: -8px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-header">
+    <h1>Flow 02 — Identification cliente</h1>
+    <p>Interface cliente · Pop Salon · POC Rendez-vous</p>
+  </div>
+
+  <!-- Path selector -->
+  <div class="path-selector">
+    <button class="active" onclick="setPath('returning')">Cliente existante</button>
+    <button onclick="setPath('new')">Nouvelle cliente</button>
+  </div>
+
+  <!-- ══ SCREENS ROW ══ -->
+  <div class="screens-row">
+
+    <!-- ── Écran 1 : Accueil ── -->
+    <div class="phone-wrap">
+      <span class="screen-label">Écran 1 · Accueil</span>
+      <div class="phone">
+        <div class="screen">
+          <div class="app-bar">
+            <span class="logo">✂ Pop Salon</span>
+            <span class="step-indicator">Étape 1 / 4</span>
+          </div>
+          <div class="screen-body">
+            <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; text-align:center;">
+              <div style="font-size:2.8rem;">✂️</div>
+              <div class="screen-title" style="font-size:1.15rem;">Prenez rendez-vous<br/>en quelques clics</div>
+              <div class="screen-subtitle" style="text-align:center">
+                Pas de compte requis.<br/>Entrez votre numéro ou courriel<br/>pour commencer.
+              </div>
+            </div>
+            <button class="btn-primary">Prendre un rendez-vous</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="arrow">→</div>
+
+    <!-- ── Écran 2 : Identification ── -->
+    <div class="phone-wrap">
+      <span class="screen-label">Écran 2 · Identification</span>
+      <div class="phone">
+        <div class="screen">
+          <div class="app-bar">
+            <span class="logo">✂ Pop Salon</span>
+            <span class="step-indicator">Étape 2 / 4</span>
+          </div>
+          <div class="screen-body">
+            <div class="screen-title">Identifiez-vous</div>
+            <div class="screen-subtitle">Aucun mot de passe requis. Nous utilisons votre numéro ou courriel pour retrouver votre profil.</div>
+
+            <div>
+              <div class="field-label">Numéro de téléphone</div>
+              <input class="field-input filled" type="tel" value="819 555-1234" readonly />
+            </div>
+
+            <div class="divider-or"><span>ou</span></div>
+
+            <div>
+              <div class="field-label">Adresse courriel</div>
+              <input class="field-input" type="email" placeholder="example@courriel.com" readonly />
+            </div>
+
+            <div class="note">
+              <strong>Pourquoi ?</strong> Cela nous permet d'afficher des disponibilités adaptées à votre historique de visites.
+            </div>
+
+            <button class="btn-primary" style="margin-top:auto">Continuer →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="arrow">→</div>
+
+    <!-- ── Écran 3a : Cliente reconnue ── -->
+    <div class="phone-wrap path-content visible" id="path-returning">
+      <span class="screen-label">Écran 3a · Cliente reconnue</span>
+      <div class="phone">
+        <div class="screen">
+          <div class="app-bar">
+            <span class="logo">✂ Pop Salon</span>
+            <span class="step-indicator">Étape 3 / 4</span>
+          </div>
+          <div class="screen-body">
+            <div class="welcome-banner">
+              <div class="greeting">Bonjour, Marie ! 👋</div>
+              <div class="sub">Contente de vous revoir. Votre profil est prêt.</div>
+            </div>
+
+            <div class="profile-card">
+              <div class="avatar">M</div>
+              <div class="name">Marie Tremblay</div>
+              <div class="meta">Dernière visite : 14 janvier 2026</div>
+              <div class="meta">Téléphone : 819 555-1234</div>
+              <div class="tag-row">
+                <span class="tag">Coupe : 45 min</span>
+                <span class="tag">Coloration : 2h15</span>
+                <span class="tag green">Cliente existante</span>
+              </div>
+            </div>
+
+            <div class="note">
+              Ces durées seront utilisées pour vous proposer des disponibilités adaptées.
+            </div>
+
+            <button class="btn-primary">Choisir un service →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Écran 3b : Nouvelle cliente ── -->
+    <div class="phone-wrap path-content" id="path-new">
+      <span class="screen-label">Écran 3b · Nouvelle cliente</span>
+      <div class="phone">
+        <div class="screen">
+          <div class="app-bar">
+            <span class="logo">✂ Pop Salon</span>
+            <span class="step-indicator">Étape 3 / 4</span>
+          </div>
+          <div class="screen-body">
+            <div class="welcome-banner new-client">
+              <div class="greeting">Bienvenue ! 🌿</div>
+              <div class="sub">Première visite ? On est ravies de vous accueillir. Nous vous proposerons des créneaux selon les durées standards.</div>
+            </div>
+
+            <div class="note">
+              <strong>Nouveau profil créé</strong> pour le : <strong>819 555-9876</strong><br/><br/>
+              Après votre première visite, la coiffeuse ajustera votre durée habituelle dans votre fiche.
+            </div>
+
+            <div style="background:#fff; border:1.5px solid #e5ddd8; border-radius:12px; padding:12px;">
+              <div class="field-label" style="margin-bottom:8px;">Durées appliquées par défaut</div>
+              <div class="tag-row">
+                <span class="tag">Coupe : 45 min</span>
+                <span class="tag">Coloration : 2h30</span>
+                <span class="tag">Mise en plis : 1h</span>
+              </div>
+            </div>
+
+            <button class="btn-primary green">Choisir un service →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Legend -->
+  <div style="max-width:700px; width:100%; background:#fff; border-radius:14px; padding:18px 22px; border:1px solid #e5ddd8;">
+    <div style="font-size:.75rem; font-weight:700; color:#5c3d2e; text-transform:uppercase; letter-spacing:.06em; margin-bottom:10px;">Légende du flow</div>
+    <div style="display:grid; gap:6px; font-size:.78rem; color:#6a5248; line-height:1.5;">
+      <div><strong>Écran 1</strong> — Point d'entrée public (lien, Facebook, QR code). CTA unique : "Prendre un rendez-vous".</div>
+      <div><strong>Écran 2</strong> — Saisie du numéro de téléphone (prioritaire) ou courriel. Aucun mot de passe. Le numéro 819 555-1234 simule une cliente reconnue dans le système.</div>
+      <div><strong>Écran 3a</strong> — Cliente reconnue : profil chargé avec prénom, durées habituelles et dernière visite.</div>
+      <div><strong>Écran 3b</strong> — Nouvelle cliente : profil temporaire avec durées par défaut; fiche finale créée par la coiffeuse après la visite.</div>
+      <div style="margin-top:4px; color:#b8a99e;">→ Les deux chemins mènent ensuite à : <strong>Flow 03 — Calcul des plages</strong></div>
+    </div>
+  </div>
+
+  <script>
+    function setPath(path) {
+      document.querySelectorAll('.path-selector button').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+      document.querySelectorAll('.path-content').forEach(el => el.classList.remove('visible'));
+      document.getElementById('path-' + path).classList.add('visible');
+    }
+  </script>
+</body>
+</html>

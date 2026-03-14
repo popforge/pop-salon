@@ -12,8 +12,8 @@ flowchart TD
     C -->|Oui| D[Charger profil existant<br/>Nom, durées habituelles par service<br/>historique des visites]
     C -->|Non| E[Créer profil temporaire<br/>Identifiant saisi seulement]
 
-    D --> F[Afficher message de bienvenue\npar prénom si disponible]
-    E --> G[Afficher message de bienvenue\npour nouvelle cliente]
+    D --> F[Afficher message de bienvenue<br/>par prénom si disponible]
+    E --> G[Afficher message de bienvenue<br/>pour nouvelle cliente]
 
     F --> NEXT([Flow 03 — Calcul des plages])
     G --> NEXT

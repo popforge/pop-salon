@@ -1,5 +1,7 @@
 # Pop Salon
 
+Courriel de communications pour ce projet : popforge.popsalon@gmail.com
+
 Logiciel de gestion pensé pour les **salons de coiffure indépendants**, en particulier les **salons à domicile opérés par une seule propriétaire**.
 
 Le projet vise à réduire la charge mentale administrative pour laisser plus de place à ce qui crée réellement de la valeur pour la coiffeuse : **coiffer, conseiller, fidéliser et faire rouler son entreprise sans friction inutile**.
