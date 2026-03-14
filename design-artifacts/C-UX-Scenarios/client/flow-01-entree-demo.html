@@ -18,13 +18,17 @@
     .modal .box{background:#fff;padding:18px;border-radius:10px;max-width:560px;width:92%}
     /* Facebook image + simulated CTA */
     .fb-post { position: relative; display: inline-block; }
-    .fb-post img { display: block; max-width: 140px; height: auto; border-radius:8px; }
+    .fb-post img { display: block; width: 100%; max-width: 100%; height: auto; border-radius:8px; }
+    /* Media image helper: constrain width, keep aspect ratio so card height grows with image */
+    .media-img { width: 100%; max-width: 100%; height: auto; border-radius:8px; border:1px solid #e6ded8; display:block; object-fit:contain; }
+    /* Temporary hide utility */
+    .card.hidden { display: none !important; }
   </style>
 </head>
 <body>
   <div class="wrap">
     <h1>Démo — Flow 01 : Entrées multicanal</h1>
-    <p class="small">Cliquez sur un canal pour voir ce qu'il fait. Les canaux numériques redirigent vers la page de demande (Flow 02). Le canal "Appel téléphonique" simule l'interface coiffeuse.</p>
+    <p class="small">Voici les différentes façon dont votre client pourra prendre rendez-vous. Cliquez sur un canal pour voir ce qu'il fait. Le canal "Appel téléphonique" simule l'interface coiffeuse lorsque la coiffeuse parle au téléphone avec son client.</p>
 
     <div class="channels">
       <div class="card">
@@ -41,50 +45,44 @@
       </div>
 
       <div class="card">
-        <strong>Facebook / Instagram</strong>
-        <div style="margin-top:10px; display:flex; gap:12px; align-items:center;">
-          <div class="fb-post" style="border:1px solid #e6ded8; padding:6px; border-radius:8px; background:#fff;">
-            <img src="assets/facebook-cta-sample.png" alt="Apercu post Facebook - Prendre rendez-vous" />
-          </div>
-          <div>
-            <div><button onclick="goToRequest('social')">Ouvrir via post (simulé)</button></div>
-            <div class="small">Clique sur le post → navigateur → page de demande.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <strong>Google Business Profile</strong>
-        <div style="margin-top:10px;"><button onclick="goToRequest('google')">Ouvrir le lien depuis GBP</button></div>
-        <div class="small">Redirection vers la même URL de demande.</div>
-      </div>
-
-      <div class="card">
         <strong>Messenger (bot)</strong>
-        <div style="margin-top:10px;"><button onclick="simulateBot('messenger')">Simuler message bot</button></div>
-        <div class="small">Le bot renvoie un message contenant le lien de demande.</div>
+        <div style="margin-top:10px;">
+          <div><button onclick="simulateBot('messenger')">Simuler message bot</button></div>
+          <div class="small">Le bot renvoie un message contenant le lien de demande.</div>
+          <div style="margin-top:10px;"><img class="media-img" src="assets/messenger-cta-sample.png" alt="Apercu bot Messenger"/></div>
+        </div>
       </div>
 
       <div class="card">
         <strong>SMS (mot-clé)</strong>
         <div style="margin-top:10px;"><button onclick="simulateBot('sms')">Simuler SMS automatique</button></div>
         <div class="small">Le système répond avec un lien vers la page de demande.</div>
+        <div style="margin-top:10px;"><img class="media-img" src="assets/sms-cta-sample.png" alt="Apercu SMS - Prendre rendez-vous"/></div>
       </div>
 
       <div class="card">
         <strong>Appel téléphonique</strong>
-        <div style="margin-top:10px;"><button onclick="simulateCall()">Simuler appel (interface coiffeuse)</button></div>
+        <div style="margin-top:10px;"><button onclick="simulateCall()">Simuler appel (interface coiffeuse) (****A VENIR****)</button></div>
         <div class="small">Le flux téléphone est assisté par la coiffeuse (voir documentation).</div>
+      </div>
+
+      <div class="card">
+        <strong>Facebook</strong>
+        <div style="margin-top:10px;">
+          <div><button onclick="goToRequest('social')">Ouvrir via post (simulé)</button></div>
+          <div class="small">Clique sur le post → navigateur → page de demande.</div>
+          <div style="margin-top:10px;"><img class="media-img" src="assets/facebook-cta-sample.png" alt="Apercu post Facebook - Prendre rendez-vous"/></div>
+        </div>
+      </div>
+
+      <div class="card hidden">
+        <strong>Google Business Profile</strong>
+        <div style="margin-top:10px;"><button onclick="goToRequest('google')">Ouvrir le lien depuis GBP</button></div>
+        <div class="small">Redirection vers la même URL de demande.</div>
       </div>
     </div>
 
-    <hr style="margin:18px 0;border:none;border-top:1px solid #ebe6e2" />
-
-    <div class="card">
-      <strong>Notes</strong>
-      <p class="small">La page de demande utilisée ici est : <a href="flow-02-identification.html" target="_blank">flow-02-identification.html</a></p>
-      <p class="small">Utilisez cette démo pour vérifier que les canaux convergent vers la même URL et pour valider les textes et règles avant mise en production.</p>
-    </div>
+    
   </div>
 
   <script>
