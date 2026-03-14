@@ -1,4 +1,4 @@
-# Flow 06 — Saisie assistée par la coiffeuse (téléphone)
+# Flow 07 — Saisie assistée par la coiffeuse (téléphone)
 
 **Interface** : Coiffeuse  
 **Objectif** : Permettre à la coiffeuse de saisir une demande de rendez-vous au nom d'une cliente qui appelle par téléphone, en passant par les mêmes règles moteur que le flux autonome.
@@ -10,8 +10,10 @@ flowchart TD
     B --> C[Saisir le numéro de téléphone<br/>ou le courriel de la cliente]
 
     C --> D{Cliente reconnue?}
-    D -->|Oui| E[Charger profil existant\nDurée habituelle par service]
-    D -->|Non| F[Créer fiche temporaire\nDurée par défaut]
+    D -->|Oui| E[Charger profil existant
+Durée habituelle par service]
+    D -->|Non| F[Créer fiche temporaire
+Durée par défaut]
 
     E & F --> G[Choisir le service demandé<br/>au nom de la cliente]
 
@@ -19,12 +21,15 @@ flowchart TD
 
     H --> I[Coiffeuse sélectionne une plage<br/>en accord avec la cliente au téléphone]
 
-    I --> J[Demande saisie par la coiffeuse\n= déjà acceptée\nStatut : Confirmé directement]
+    I --> J[Demande saisie par la coiffeuse
+= déjà acceptée
+Statut : Confirmé directement]
 
     J --> K[Confirmation envoyée automatiquement<br/>à la cliente par SMS ou courriel]
     J --> L[Agenda mis à jour]
 
-    K --> M[Fin de l'appel\nCliente a sa confirmation en main]
+    K --> M[Fin de l'appel
+Cliente a sa confirmation en main]
 ```
 
 ## Notes

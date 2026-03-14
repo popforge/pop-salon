@@ -1,4 +1,4 @@
-# Flow 04 — Prévention des conflits de réservation
+# Flow 05 — Prévention des conflits de réservation
 
 **Interface** : Coiffeuse (moteur système)  
 **Objectif** : S'assurer que le système ne propose jamais une plage incompatible et résout automatiquement les cas de conflit.
@@ -32,4 +32,4 @@ flowchart TD
 
 - Ce flow est exécuté **côté système** à chaque demande ou modification de l'agenda.
 - La prévention des conflits est une règle automatique, sans intervention manuelle.
-- Les règles de parallélisation coloration sont détaillées dans [coiffeuse/05-coloration-parallele.md](coiffeuse/05-coloration-parallele.md).
+- Les règles de parallélisation coloration sont détaillées dans [coiffeuse/06-coloration-parallele.md](coiffeuse/06-coloration-parallele.md).

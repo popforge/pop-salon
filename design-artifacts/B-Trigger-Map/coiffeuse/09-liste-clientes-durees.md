@@ -1,4 +1,4 @@
-# Flow 07 — Gestion de la liste clientes et des durées habituelles
+# Flow 08 — Gestion de la liste clientes et des durées habituelles
 
 **Interface** : Coiffeuse  
 **Objectif** : Permettre à la coiffeuse de consulter et mettre à jour sa liste de clientes, les durées habituelles par service, et les notes pertinentes.
@@ -13,17 +13,28 @@ flowchart TD
 
     D --> E{Action choisie}
 
-    E -->|Modifier une durée habituelle| F[Sélectionner le service concerné\nCoupe, Coloration, Mise en plis, Autre]
-    F --> G[Saisir la nouvelle durée<br/>en minutes]
-    G --> H[Sauvegarder<br/>Impact immédiat sur les prochaines<br/>propositions pour cette cliente]
+    E -->|Modifier une durée habituelle| F[Sélectionner le service concerné
+Coupe, Coloration, Mise en plis, Autre]
+    F --> G[Saisir la nouvelle durée
+en minutes]
+    G --> H[Sauvegarder
+Impact immédiat sur les prochaines
+propositions pour cette cliente]
 
-    E -->|Consulter l'historique| I[Afficher la liste des RDV passés<br/>Date, service, durée réelle, statut<br/>exemples : Complété, Annulé, Absent]
+    E -->|Consulter l'historique| I[Afficher la liste des RDV passés
+Date, service, durée réelle, statut
+exemples : Complété, Annulé, Absent]
 
-    E -->|Ajouter une note| J[Saisir une note libre<br/>exemples : allergie, préférence, enfant<br/>prend plus de temps le matin]
-    J --> K[Note sauvegardée<br/>Visible à chaque futur RDV]
+    E -->|Ajouter une note| J[Saisir une note libre
+exemples : allergie, préférence, enfant
+prend plus de temps le matin]
+    J --> K[Note sauvegardée
+Visible à chaque futur RDV]
 
-    E -->|Nouvelle cliente à créer| L[Saisir téléphone ou courriel\nPrénom ou nom optionnel]
-    L --> M[Fiche créée avec durées par défaut\nà ajuster après le premier rendez-vous]
+    E -->|Nouvelle cliente à créer| L[Saisir téléphone ou courriel
+Prénom ou nom optionnel]
+    L --> M[Fiche créée avec durées par défaut
+à ajuster après le premier rendez-vous]
 ```
 
 ## Notes

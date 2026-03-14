@@ -1,4 +1,4 @@
-# Flow 05 — Coloration avec pause et rendez-vous en parallèle
+# Flow 06 — Coloration avec pause et rendez-vous en parallèle
 
 **Interface** : Coiffeuse (moteur système + agenda)  
 **Objectif** : Modéliser la réalité métier d'une coloration avec temps de pause, et permettre l'insertion d'un second rendez-vous compatible pendant cette pause.
@@ -9,13 +9,17 @@ flowchart TD
 
     B --> C[Exemple de découpage<br/>Phase 1 : 9h00 à 9h45<br/>Pause : 9h45 à 10h30<br/>Phase 2 : 10h30 à 11h30]
 
-    C --> D{La fenêtre de pause\nest-elle suffisante\npour un autre service?}
+    C --> D{La fenêtre de pause
+est-elle suffisante
+pour un autre service?}
 
     D -->|Non — fenêtre trop courte| E[Pause marquée occupée<br/>Aucun RDV parallèle possible]
 
-    D -->|Oui| F[Fenêtre de pause disponible\npour un service compatible]
+    D -->|Oui| F[Fenêtre de pause disponible
+pour un service compatible]
 
-    F --> G{Nouvelle demande reçue<br/>lors de la fenêtre?}
+    F --> G{Nouvelle demande reçue
+lors de la fenêtre?}
 
     G -->|Non| H[Fenêtre reste disponible<br/>jusqu'à la Phase 2]
 
@@ -32,5 +36,5 @@ flowchart TD
 
 - Le découpage en phases est propre aux services de **coloration**. Les autres services sont traités comme un bloc continu.
 - La **durée de la pause** est configurable par service et peut varier selon la technique utilisée.
-- La coiffeuse peut visualiser les deux rendez-vous liés dans l'agenda (voir [coiffeuse/02-agenda-reservations.md](coiffeuse/02-agenda-reservations.md)).
+- La coiffeuse peut visualiser les deux rendez-vous liés dans l'agenda (voir [coiffeuse/03-agenda-reservations.md](coiffeuse/03-agenda-reservations.md)).
 - **Hypothèse à valider** : les durées réelles des phases (application, pose, rinçage) avec Pause Coiffée.

@@ -1,4 +1,4 @@
-# Flow 03 — Validation d'une demande
+# Flow 04 — Validation d'une demande
 
 **Interface** : Coiffeuse  
 **Objectif** : Permettre à la coiffeuse d'accepter, refuser ou proposer une alternative pour chaque demande de rendez-vous reçue.
@@ -9,14 +9,18 @@ flowchart TD
 
     B --> C{Décision de la coiffeuse}
 
-    C -->|Accepter| D[Plage réservée et verrouillée\nStatut : Confirmé]
+    C -->|Accepter| D[Plage réservée et verrouillée
+Statut : Confirmé]
     D --> E[Confirmation envoyée à la cliente<br/>par SMS ou courriel]
     D --> F[Agenda mis à jour]
 
     C -->|Refuser| G[Statut : Refusé]
-    G --> H[Message envoyé à la cliente\nVotre demande n'est pas disponible\nInvitation à soumettre une nouvelle demande]
+    G --> H[Message envoyé à la cliente
+Votre demande n'est pas disponible
+Invitation à soumettre une nouvelle demande]
 
-    C -->|Proposer une alternative| I[Coiffeuse consulte son agenda\npour choisir une autre plage]
+    C -->|Proposer une alternative| I[Coiffeuse consulte son agenda
+pour choisir une autre plage]
     I --> J[Sélectionner une plage alternative]
     J --> K[Proposition envoyée à la cliente<br/>Statut : Alternative proposée]
 

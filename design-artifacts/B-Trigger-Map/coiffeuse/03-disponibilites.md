@@ -1,4 +1,4 @@
-# Flow 01 — Configuration des disponibilités
+# Flow 02 — Configuration des disponibilités
 
 **Interface** : Coiffeuse  
 **Objectif** : Permettre à la coiffeuse de définir et maintenir ses plages d'ouverture habituelles ainsi que ses exceptions, afin que le moteur de propositions soit toujours à jour.

@@ -1,4 +1,4 @@
-# Flow 02 — Consultation de l'agenda et des réservations
+# Flow 03 — Consultation de l'agenda et des réservations
 
 **Interface** : Coiffeuse  
 **Objectif** : Permettre à la coiffeuse de visualiser rapidement son agenda et d'accéder aux détails de chaque plage.
@@ -20,7 +20,7 @@ flowchart TD
     G --> G1[Afficher motif de l'indisponibilité<br/>Option : retirer le blocage]
     H --> H1[Afficher les deux RDV liés<br/>Cliente A phase 1 et 2<br/>Cliente B pendant la pause]
 
-    F1 --> NEXT([Flow 03 — Validation de la demande])
+    F1 --> NEXT([Flow 04 — Validation de la demande])
 ```
 
 ## Notes
