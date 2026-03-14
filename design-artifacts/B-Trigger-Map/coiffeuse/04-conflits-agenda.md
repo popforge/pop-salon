@@ -5,27 +5,27 @@
 
 ```mermaid
 flowchart TD
-    A([Nouvelle demande soumise\nou plage modifiée]) --> B[Système vérifie la plage demandée]
+    A([Nouvelle demande soumise<br/>ou plage modifiée]) --> B[Système vérifie la plage demandée]
 
-    B --> C{Plage dans les\nhours d'ouverture?}
-    C -->|Non| Z[Plage exclue\nnon proposée à la cliente]
+    B --> C{Plage dans les<br/>hours d'ouverture?}
+    C -->|Non| Z[Plage exclue<br/>non proposée à la cliente]
 
-    C -->|Oui| D{Plage déjà\nréservée ou bloquée?}
+    C -->|Oui| D{Plage déjà<br/>réservée ou bloquée?}
     D -->|Oui| Z
 
-    D -->|Non| E{Durée requise tient\ndans la fenêtre disponible?}
+    D -->|Non| E{Durée requise tient<br/>dans la fenêtre disponible?}
     E -->|Non — RDV suivant trop proche| Z
-    E -->|Oui| F{Règles de parallélisation\napplicables?}
+    E -->|Oui| F{Règles de parallélisation<br/>applicables?}
 
     F -->|Non| G[Plage valide — ajoutée aux options]
-    F -->|Oui — pause coloration active| H[Vérifier compatibilité\nde la fenêtre de pause\navec le service demandé et sa durée]
-    H --> I{Durée du service\ndans la fenêtre de pause?}
+    F -->|Oui — pause coloration active| H[Vérifier compatibilité<br/>de la fenêtre de pause<br/>avec le service demandé et sa durée]
+    H --> I{Durée du service<br/>dans la fenêtre de pause?}
     I -->|Oui| G
     I -->|Non| Z
 
-    Z --> J{D'autres plages\ncompatibles disponibles?}
+    Z --> J{D'autres plages<br/>compatibles disponibles?}
     J -->|Oui| K[Proposer les plages compatibles restantes]
-    J -->|Non| L[Aucune disponibilité\nSuggérer une autre période]
+    J -->|Non| L[Aucune disponibilité<br/>Suggérer une autre période]
 ```
 
 ## Notes

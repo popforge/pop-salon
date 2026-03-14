@@ -7,18 +7,18 @@
 flowchart TD
     A([Coiffeuse ouvre son agenda]) --> B[Afficher vue par jour ou semaine]
 
-    B --> C{La coiffeuse sélectionne\nune plage}
+    B --> C{La coiffeuse sélectionne<br/>une plage}
 
-    C --> D[Plage libre\ndisponible à la réservation]
+    C --> D[Plage libre<br/>disponible à la réservation]
     C --> E[Plage réservée — RDV confirmé]
-    C --> F[Demande en attente\nde validation]
-    C --> G[Plage bloquée\nindisponibilité coiffeuse]
-    C --> H[Plage en parallèle\nRDV coloration avec pause active]
+    C --> F[Demande en attente<br/>de validation]
+    C --> G[Plage bloquée<br/>indisponibilité coiffeuse]
+    C --> H[Plage en parallèle<br/>RDV coloration avec pause active]
 
-    E --> E1[Afficher détails\nCliente, service, durée, heure\nOption : modifier ou annuler]
-    F --> F1[Afficher résumé de la demande\nCliente, service, plage souhaitée\nActions : Accepter, Refuser, Proposer alternative]
-    G --> G1[Afficher motif de l'indisponibilité\nOption : retirer le blocage]
-    H --> H1[Afficher les deux RDV liés\nCliente A phase 1 et 2\nCliente B pendant la pause]
+    E --> E1[Afficher détails<br/>Cliente, service, durée, heure<br/>Option : modifier ou annuler]
+    F --> F1[Afficher résumé de la demande<br/>Cliente, service, plage souhaitée<br/>Actions : Accepter, Refuser, Proposer alternative]
+    G --> G1[Afficher motif de l'indisponibilité<br/>Option : retirer le blocage]
+    H --> H1[Afficher les deux RDV liés<br/>Cliente A phase 1 et 2<br/>Cliente B pendant la pause]
 
     F1 --> NEXT([Flow 03 — Validation de la demande])
 ```

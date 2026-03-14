@@ -14,15 +14,15 @@ flowchart TD
     B --> G[SMS envoyé avec mot-clé]
     B --> H[Appel téléphonique]
 
-    F --> F1[Réponse automatique Messenger\ncontenant le lien de demande]
-    G --> G1[Réponse automatique SMS\ncontenant le lien de demande]
+    F --> F1[Réponse automatique Messenger<br/>contenant le lien de demande]
+    G --> G1[Réponse automatique SMS<br/>contenant le lien de demande]
 
     C --> Z[Page web mobile de demande de rendez-vous]
     D --> Z
     E --> Z
     F1 --> Z
     G1 --> Z
-    H --> I([Flux téléphone assisté\npar la coiffeuse])
+    H --> I([Flux téléphone assisté<br/>par la coiffeuse])
 
     Z --> NEXT([Flow 02 — Identification cliente])
 ```

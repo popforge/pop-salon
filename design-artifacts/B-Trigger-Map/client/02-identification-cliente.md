@@ -5,12 +5,12 @@
 
 ```mermaid
 flowchart TD
-    A([Page web mobile de demande]) --> B[Cliente saisit son numéro de téléphone\nou son courriel]
+    A([Page web mobile de demande]) --> B[Cliente saisit son numéro de téléphone<br/>ou son courriel]
 
-    B --> C{Cliente reconnue\ndans le système?}
+    B --> C{Cliente reconnue<br/>dans le système?}
 
-    C -->|Oui| D[Charger profil existant\nNom, durées habituelles par service\nhistorique des visites]
-    C -->|Non| E[Créer profil temporaire\nIdentifiant saisi seulement]
+    C -->|Oui| D[Charger profil existant<br/>Nom, durées habituelles par service<br/>historique des visites]
+    C -->|Non| E[Créer profil temporaire<br/>Identifiant saisi seulement]
 
     D --> F[Afficher message de bienvenue\npar prénom si disponible]
     E --> G[Afficher message de bienvenue\npour nouvelle cliente]

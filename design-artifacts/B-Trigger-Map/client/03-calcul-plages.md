@@ -14,17 +14,17 @@ flowchart TD
     B1 --> B5[Premier rendez-vous]
     B1 --> B6[Autre]
 
-    B2 & B3 & B4 & B5 & B6 --> C{Cliente existante\navec durée habituelle\npour ce service?}
+    B2 & B3 & B4 & B5 & B6 --> C{Cliente existante<br/>avec durée habituelle<br/>pour ce service?}
 
-    C -->|Oui| D[Utiliser durée habituelle\nde la fiche cliente]
-    C -->|Non| E[Utiliser durée par défaut\ndéfinie pour ce service]
+    C -->|Oui| D[Utiliser durée habituelle<br/>de la fiche cliente]
+    C -->|Non| E[Utiliser durée par défaut<br/>définie pour ce service]
 
     D --> F[Durée requise déterminée]
     E --> F
 
-    F --> G[Cliente indique la période souhaitée\nmois ou plage de dates]
+    F --> G[Cliente indique la période souhaitée<br/>mois ou plage de dates]
 
-    G --> H[Charger les plages d'ouverture\nde la coiffeuse pour la période]
+    G --> H[Charger les plages d'ouverture<br/>de la coiffeuse pour la période]
     H --> I[Soustraire les plages déjà réservées\net les indisponibilités]
     I --> J[Appliquer règles de parallélisation\ncoloration avec pause si applicable]
 

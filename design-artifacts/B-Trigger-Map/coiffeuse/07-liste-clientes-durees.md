@@ -5,22 +5,22 @@
 
 ```mermaid
 flowchart TD
-    A([Coiffeuse accède à la\nliste des clientes]) --> B[Afficher toutes les clientes\nNom, contact, date de la dernière visite]
+    A([Coiffeuse accède à la<br/>liste des clientes]) --> B[Afficher toutes les clientes<br/>Nom, contact, date de la dernière visite]
 
     B --> C[Coiffeuse sélectionne une cliente]
 
-    C --> D[Afficher la fiche cliente\nNom, téléphone, courriel\nDurée habituelle par service\nHistorique des visites]
+    C --> D[Afficher la fiche cliente<br/>Nom, téléphone, courriel<br/>Durée habituelle par service<br/>Historique des visites]
 
     D --> E{Action choisie}
 
     E -->|Modifier une durée habituelle| F[Sélectionner le service concerné\nCoupe, Coloration, Mise en plis, Autre]
-    F --> G[Saisir la nouvelle durée\nen minutes]
-    G --> H[Sauvegarder\nImpact immédiat sur les prochaines\npropositions pour cette cliente]
+    F --> G[Saisir la nouvelle durée<br/>en minutes]
+    G --> H[Sauvegarder<br/>Impact immédiat sur les prochaines<br/>propositions pour cette cliente]
 
-    E -->|Consulter l'historique| I[Afficher la liste des RDV passés\nDate, service, durée réelle, statut\nexemples : Complété, Annulé, Absent]
+    E -->|Consulter l'historique| I[Afficher la liste des RDV passés<br/>Date, service, durée réelle, statut<br/>exemples : Complété, Annulé, Absent]
 
-    E -->|Ajouter une note| J[Saisir une note libre\nexemples : allergie, préférence, enfant\nprend plus de temps le matin]
-    J --> K[Note sauvegardée\nVisible à chaque futur RDV]
+    E -->|Ajouter une note| J[Saisir une note libre<br/>exemples : allergie, préférence, enfant<br/>prend plus de temps le matin]
+    J --> K[Note sauvegardée<br/>Visible à chaque futur RDV]
 
     E -->|Nouvelle cliente à créer| L[Saisir téléphone ou courriel\nPrénom ou nom optionnel]
     L --> M[Fiche créée avec durées par défaut\nà ajuster après le premier rendez-vous]

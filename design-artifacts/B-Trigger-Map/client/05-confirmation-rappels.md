@@ -7,16 +7,16 @@
 flowchart TD
     A([Coiffeuse a accepté la demande]) --> B[Statut mis à jour : Confirmé]
 
-    B --> C[Confirmation envoyée à la cliente\nService, date, heure, durée]
+    B --> C[Confirmation envoyée à la cliente<br/>Service, date, heure, durée]
 
-    C --> D{Canal de contact\ndisponible?}
+    C --> D{Canal de contact<br/>disponible?}
     D -->|Téléphone connu| E[Envoi SMS de confirmation]
     D -->|Courriel connu| F[Envoi courriel de confirmation]
     D -->|Les deux| E & F
 
-    E & F --> G[Planifier rappel J-2\n2 jours avant le rendez-vous]
+    E & F --> G[Planifier rappel J-2<br/>2 jours avant le rendez-vous]
 
-    G --> H[Rappel envoyé J-2\nRappel de la date, heure et service]
+    G --> H[Rappel envoyé J-2<br/>Rappel de la date, heure et service]
 
     H --> I{Réponse de la cliente?}
     I -->|Confirme sa présence| J[Statut maintenu : Confirmé]
@@ -24,7 +24,7 @@ flowchart TD
     I -->|Aucune réponse| L[Planifier rappel J-1]
 
     L --> M[Rappel envoyé J-1]
-    M --> N[Rendez-vous maintenu\nSans réponse = présence assumée]
+    M --> N[Rendez-vous maintenu<br/>Sans réponse = présence assumée]
 ```
 
 ## Notes

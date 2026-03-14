@@ -5,21 +5,21 @@
 
 ```mermaid
 flowchart TD
-    A([Cliente veut modifier ou annuler\nun rendez-vous confirmé]) --> B{Action choisie}
+    A([Cliente veut modifier ou annuler<br/>un rendez-vous confirmé]) --> B{Action choisie}
 
     B --> C[Replanifier]
     B --> D[Annuler]
 
     C --> E[Libérer la plage existante]
     E --> F[Statut RDV : Annulé par cliente — replanification]
-    F --> G([Relancer Flow 03 — Calcul des plages\npour trouver une nouvelle option])
+    F --> G([Relancer Flow 03 — Calcul des plages<br/>pour trouver une nouvelle option])
 
     D --> H[Confirmer l'annulation]
     H --> I[Plage libérée]
     I --> J[Statut RDV : Annulé par cliente]
     J --> K[Confirmation d'annulation envoyée à la cliente]
     J --> L[Notification envoyée à la coiffeuse]
-    J --> M[Rendez-vous conservé dans l'historique\navec statut annulé et traçabilité]
+    J --> M[Rendez-vous conservé dans l'historique<br/>avec statut annulé et traçabilité]
 
     G --> N([Nouvelle demande soumise — Flow 04])
 ```

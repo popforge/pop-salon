@@ -5,24 +5,24 @@
 
 ```mermaid
 flowchart TD
-    A([Coiffeuse accède à la\nconfiguration des disponibilités]) --> B[Définir les plages d'ouverture habituelles\njours de la semaine et heures]
+    A([Coiffeuse accède à la<br/>configuration des disponibilités]) --> B[Définir les plages d'ouverture habituelles<br/>jours de la semaine et heures]
 
-    B --> C[Exemple : Mardi au vendredi\n9h00 à 17h00]
+    B --> C[Exemple : Mardi au vendredi<br/>9h00 à 17h00]
 
     C --> D{Ajouter des exceptions?}
 
     D -->|Oui| E[Choisir le type d'exception]
-    E --> E1[Congé ou vacances\ndates précises]
-    E --> E2[Indisponibilité ponctuelle\nex. rendez-vous médical]
-    E --> E3[Journée modifiée\nhoraire différent pour une date]
+    E --> E1[Congé ou vacances<br/>dates précises]
+    E --> E2[Indisponibilité ponctuelle<br/>ex. rendez-vous médical]
+    E --> E3[Journée modifiée<br/>horaire différent pour une date]
 
-    E1 & E2 & E3 --> F[Sauvegarder l'exception\navec date de début et de fin]
+    E1 & E2 & E3 --> F[Sauvegarder l'exception<br/>avec date de début et de fin]
 
     D -->|Non| G[Sauvegarder les disponibilités]
     F --> G
 
-    G --> H[Système recalcule immédiatement\nles plages disponibles pour les nouvelles demandes]
-    H --> I[Les propositions aux clientes\nreflètent les nouvelles disponibilités]
+    G --> H[Système recalcule immédiatement<br/>les plages disponibles pour les nouvelles demandes]
+    H --> I[Les propositions aux clientes<br/>reflètent les nouvelles disponibilités]
 ```
 
 ## Notes

@@ -5,12 +5,12 @@
 
 ```mermaid
 flowchart TD
-    A([Notification reçue\nnouvelle demande de rendez-vous]) --> B[Coiffeuse consulte la demande\nCliente, service, plage demandée, durée estimée]
+    A([Notification reçue<br/>nouvelle demande de rendez-vous]) --> B[Coiffeuse consulte la demande<br/>Cliente, service, plage demandée, durée estimée]
 
     B --> C{Décision de la coiffeuse}
 
     C -->|Accepter| D[Plage réservée et verrouillée\nStatut : Confirmé]
-    D --> E[Confirmation envoyée à la cliente\npar SMS ou courriel]
+    D --> E[Confirmation envoyée à la cliente<br/>par SMS ou courriel]
     D --> F[Agenda mis à jour]
 
     C -->|Refuser| G[Statut : Refusé]
@@ -18,12 +18,12 @@ flowchart TD
 
     C -->|Proposer une alternative| I[Coiffeuse consulte son agenda\npour choisir une autre plage]
     I --> J[Sélectionner une plage alternative]
-    J --> K[Proposition envoyée à la cliente\nStatut : Alternative proposée]
+    J --> K[Proposition envoyée à la cliente<br/>Statut : Alternative proposée]
 
-    K --> L{Cliente accepte\nla proposition?}
+    K --> L{Cliente accepte<br/>la proposition?}
     L -->|Oui| D
-    L -->|Non| M[Cliente peut soumettre\nune nouvelle demande autonome]
-    L -->|Pas de réponse| N[Demande expirée après délai configurable\nPlage libérée]
+    L -->|Non| M[Cliente peut soumettre<br/>une nouvelle demande autonome]
+    L -->|Pas de réponse| N[Demande expirée après délai configurable<br/>Plage libérée]
 ```
 
 ## Notes
