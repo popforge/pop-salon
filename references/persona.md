@@ -100,7 +100,7 @@ C’est donc le point de départ naturel pour un POC.
 
 #### Fournisseurs
 
-- Le fournisseur principal actuellement connu est **Chalut**.
+- Le fournisseur principal actuellement connu est **Chalut** (https://www.chalut.com/).
 - D’autres fournisseurs ou vendeurs pourraient devoir être ajoutés plus tard.
 
 #### Articles à gérer
