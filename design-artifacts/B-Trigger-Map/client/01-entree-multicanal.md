@@ -32,3 +32,7 @@ flowchart TD
 - Tous les canaux numériques convergent vers **une seule URL**.
 - Le flux téléphone est traité séparément via l'interface coiffeuse (voir [coiffeuse/06-telephone-assiste.md](../coiffeuse/06-telephone-assiste.md)).
 - La source d'entrée est enregistrée pour analyse.
+
+## Démo interactive
+
+- Une démo interactive `flow-01-entree-demo.html` a été ajoutée dans `design-artifacts/C-UX-Scenarios/client/` pour montrer les différents canaux et leur redirection vers la page de demande (ou vers le flux téléphone assisté). Utilisez la démo pour vérifier les comportements attendus avant d'intégrer les liens réels.
