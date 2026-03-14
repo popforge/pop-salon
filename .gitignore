@@ -83,6 +83,7 @@ _bmad/**/.cache/
 _bmad/**/tmp/
 _bmad/**/temp/
 _bmad/**/*.log
+_bmad-output
 
 # Conserver les fichiers de configuration personnalisés si présents
 !_bmad/_config/
