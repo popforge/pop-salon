@@ -11,22 +11,23 @@
     .screen{width:100%;height:100%;background:#faf7f5;border-radius:32px;overflow:hidden;display:flex;flex-direction:column}
     .app-bar{background:#c9756c;color:#fff;padding:34px 18px 14px;display:flex;align-items:center;justify-content:space-between}
     .logo{font-weight:800}
-    .screen-body{flex:1;padding:18px;display:flex;flex-direction:column;gap:12px}
+    .screen-body{flex:1;padding:18px 18px 24px;display:flex;flex-direction:column;gap:18px}
     .screen-title{font-weight:700;color:#3d2b1f;font-size:1.05rem}
     .screen-sub{color:#7a6255;font-size:.82rem}
-    .month-picker{display:flex;align-items:center;justify-content:space-between;gap:8px}
+    #confirm-screen .screen-sub{margin-bottom:14px}
+    .month-picker{display:flex;align-items:center;justify-content:space-between;gap:10px}
     .month-label{font-weight:700;color:#5c3d2e}
     .month-actions button{background:transparent;border:none;font-weight:700;color:#7a6255;cursor:pointer;padding:8px}
-    .slots{display:flex;flex-direction:column;gap:10px;margin-top:6px}
-    .day-row{background:#fff;border:1.5px solid #e5ddd8;border-radius:10px;padding:8px;display:flex;flex-direction:column;gap:8px}
+    .slots{display:flex;flex-direction:column;gap:14px;margin-top:10px}
+    .day-row{background:#fff;border:1.5px solid #e5ddd8;border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:12px}
     .day-header{display:flex;justify-content:space-between;align-items:center;color:#6a5248;font-weight:700}
-    .times{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+    .times{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
     .time-btn{background:#c9756c;color:#fff;border:none;border-radius:8px;padding:8px 10px;font-weight:700;cursor:pointer}
     .time-btn.small{padding:6px 8px;font-size:.86rem}
-    .note{font-size:.72rem;color:#a08880;background:#f2ece8;padding:8px;border-radius:8px}
-    .legend{max-width:340px;margin-top:12px;background:#fff;border:1px solid #e5ddd8;border-radius:12px;padding:12px;font-size:.78rem;color:#6a5248}
-    .notice{background:#f2ece8;padding:12px;border-radius:8px;color:#6a5248;margin-bottom:6px}
-    .details-lines{background:#fff;border:1px solid #f0e8e6;border-radius:8px;padding:10px;color:#6a5248;margin-top:6px}
+    .note{font-size:.72rem;color:#a08880;background:#f2ece8;padding:10px;border-radius:8px}
+    .legend{max-width:340px;margin-top:16px;background:#fff;border:1px solid #e5ddd8;border-radius:12px;padding:12px;font-size:.78rem;color:#6a5248}
+    .notice{background:#f2ece8;padding:14px;border-radius:8px;color:#6a5248;margin-bottom:12px}
+    .details-lines{background:#fff;border:1px solid #f0e8e6;border-radius:8px;padding:12px;color:#6a5248;margin-top:12px;margin-bottom:18px}
     .detail-service{font-weight:800;color:#3d2b1f;margin-bottom:6px}
     .detail-meta{color:#6a5248}
     .btn{flex:1;padding:10px;border-radius:8px;border:none;font-weight:700;cursor:pointer}
@@ -61,7 +62,7 @@
             </div>
           </div>
 
-          <div class="note">Sélectionnez le mois souhaité ci‑dessous ; les plages disponibles s'affichent pour les jours avec un point.</div>
+          <div class="note">Sélectionnez le mois et la plage souhaitée.</div>
 
           <div id="slots" class="slots"></div>
 
