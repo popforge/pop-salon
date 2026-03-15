@@ -38,7 +38,7 @@
       </div>
       <h1>Connexion</h1>
 
-      <form id="loginForm" onsubmit="event.preventDefault(); alert('Simuler connexion');">
+      <form id="loginForm">
         <label for="email">Email</label>
         <input id="email" type="text" placeholder="ex: rachel@pop.com" required>
 
@@ -50,6 +50,8 @@
           <button class="btn link" type="button" onclick="alert('Réinitialisation mot de passe');">Mot de passe oublié</button>
         </div>
 
+        <div id="loginError" style="color:#b00020;margin-top:10px;font-size:14px;display:none"></div>
+
         <div class="or">ou</div>
 
         <a class="fb" href="#" onclick="event.preventDefault(); alert('Lancer OAuth Facebook (démo)');">Se connecter avec Facebook</a>
@@ -59,6 +61,23 @@
     </div>
 
     <div style="text-align:center;margin-top:14px;color:var(--muted);font-size:13px">En ouvrant la connexion Facebook, la fenêtre d'autorisation s'ouvrira et demandera les permissions nécessaires.</div>
+
+  <script>
+    // Soumettre le formulaire et rediriger vers le dashboard si email + mot de passe présents
+    document.getElementById('loginForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      var email = document.getElementById('email').value.trim();
+      var pwd = document.getElementById('password').value.trim();
+      var err = document.getElementById('loginError');
+      if(email && pwd){
+        // Rediriger vers la démo du dashboard proprietaire
+        window.location.href = 'dashboard_demo.html';
+      } else {
+        err.textContent = 'Veuillez saisir votre email et votre mot de passe.';
+        err.style.display = 'block';
+      }
+    });
+  </script>
   </div>
 
 </body>
