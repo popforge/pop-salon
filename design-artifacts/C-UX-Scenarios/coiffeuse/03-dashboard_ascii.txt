@@ -1,0 +1,29 @@
+Écran — Dashboard propriétaire
+
++----------------------------------------------------+
+| Pop Salon — Tableau de bord                        |
+| [Nom du salon]   [Icône profil]  [Menu hamburger]  |
++----------------------------------------------------+
+| [Bandeau] Première connexion ?                     |
+| Configurez la prise de rendez-vous via votre ma    |
+| page Facebook et messenger.          [Configurer]  |
++----------------------------------------------------+
+| KPIs (cartes)              | Actions rapides       |
+| - RDV aujourd'hui: 5       | [Créer un RDV]        |
+| - Demandes en attente: 2   | [Voir calendrier]     |
+| - CA estimé cette semaine  | [Paramètres Facebook] |
++----------------------------------------------------+
+| Prochains rendez-vous                              |
+| 08:30 — Martin — Coupe homme — Confirmé            |
+| 10:00 — Léa — Balayage — Demande (à approuver)     |
+| 11:15 — Sophie — Coloration — Confirmé             |
++----------------------------------------------------+
+| Notifications / Messages                            |
+| - Demande de RDV reçue — Léa (10:00) [Voir]        |
+| - Rappel: config Facebook incomplète [Configurer]  |
++----------------------------------------------------+
+
+Interactions:
+- Cliquer sur une ligne RDV ouvre détail + actions (Confirmer, Annuler, Modifier).
+- CTA 'Voir calendrier' bascule au module Calendrier.
+- Indiquer état de connexion Facebook en haut (connecté/déconnecté).

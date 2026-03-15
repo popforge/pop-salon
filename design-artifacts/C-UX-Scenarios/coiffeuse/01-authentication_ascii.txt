@@ -1,0 +1,25 @@
+Écran 1 — Connexion (Login)
+
++--------------------------------------+
+| Pop Salon — Connexion                |
+|                                      |
+|  [ Logo ]                            |
+|                                      |
+|  Email: ____________________________ |
+|  Mot de passe: _____________________ |
+|                                      |
+|  [ Se connecter ]  [ Mot de passe oublié ] |
+|                                      |
+|  — Ou —                              |
+|  [ Se connecter avec Facebook ]      |
+|                                      |
+|  Pas encore de compte ? [ S'inscrire ]|
++--------------------------------------+
+
+Flux:
+1) L'utilisateur saisit e-mail + mdp → appuie Se connecter → si OK -> Dashboard.
+2) Si connexion via Facebook, redirection OAuth (voir configuration Facebook).
+3) Échec -> message d'erreur inline au-dessus du formulaire.
+
+Écran 2 — Première ouverture après inscription
+- Bandeau "Bienvenue, {Prénom}" + CTA "Configurer Facebook" et "Voir mon calendrier".

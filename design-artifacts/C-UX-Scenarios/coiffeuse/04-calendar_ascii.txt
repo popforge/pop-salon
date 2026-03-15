@@ -1,0 +1,28 @@
+Écran — Calendrier (vue semaine + demandes)
+
++----------------------------------------------------+
+| Calendrier — Semaine   [<]  Semaine courante  [>]  |
++----------------------------------------------------+
+| Heure | Lun | Mar | Mer | Jeu | Ven | Sam | Dim    |
+| 08:00 |     |     |     |     |     |     |        |
+| 09:00 |     |     |     | 10:00 Léa (Demande) [!]  |
+| 10:00 | 08:30 Martin — Confirmé                    |
+| 11:00 | 11:15 Sophie — Confirmé                    |
++----------------------------------------------------+
+| Demandes en attente                                |
+| 1) 10:00 — Léa — Balayage — Demande reçue          |
+|    [Voir détail]  [Approuver]  [Refuser]           |
+| 2) 14:00 — Thomas — Coupe — Demande reçue          |
+|    [Voir détail]  [Approuver]  [Refuser]           |
++----------------------------------------------------+
+| Détail RDV (si sélectionné)                        |
+| - Client: Léa                                      |
+| - Service: Balayage                                |
+| - Notes: Allergie éventuelle                       |
+| - Buttons: [Approuver] [Proposer autre horaire] [Refuser] |
++----------------------------------------------------+
+
+Notes UX:
+- Les demandes sont visibles à la fois dans la vue calendrier et dans une liste dédiée.
+- Approuver doit envoyer notification au client et bloquer le créneau.
+- Proposer autre horaire ouvre mini-dialogue avec créneaux disponibles.

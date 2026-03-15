@@ -1,0 +1,25 @@
+Écran — Configuration Facebook (Connexion page)
+
++----------------------------------------------------+
+| Connexion Facebook                                 |
+|                                                    |
+| 1) [ Connexion à Facebook ] (lance OAuth)          |
+|                                                    |
+| 2) Permissions demandées :                         |
+|    - Gestion des pages (read / publish)            |
+|    - Accès aux messages (si applicable)            |
+|    - Récupération d'événements/rdv                 |
+|                                                    |
+| 3) Boutons : [ Autoriser ]   [ Annuler ]           |
+|                                                    |
+| Si autorisé -> Écran de mapping :                  |
+|   - Sélectionner la Page Facebook du salon         |
+|   - Associer la Page au compte salon               |
+|   - Activer import des RDV Facebook → [ Activer ]  |
+|                                                    |
+| État final : "Facebook connecté" + bouton "Retour au Dashboard" |
++----------------------------------------------------+
+
+Notes UX:
+- Montrer clairement quelles données seront lues/écrites.
+- Offrir option de choisir uniquement lecture si l'utilisateur craint publications.

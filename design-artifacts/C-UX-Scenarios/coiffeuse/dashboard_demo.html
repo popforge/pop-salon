@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Pop Salon — Dashboard</title>
+  <style>
+    :root{--bg:#fafafa;--card:#fff;--accent:#2b7cff;--muted:#666}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;background:var(--bg);color:#111}
+    .container{max-width:420px;margin:20px auto;padding:16px}
+    .header{display:flex;justify-content:space-between;align-items:center}
+    .card{background:var(--card);border-radius:12px;padding:14px;margin-top:12px;box-shadow:0 6px 18px rgba(15,15,15,0.06)}
+    .banner{background:linear-gradient(90deg,#fff7e6,#fff);border-left:4px solid #ffb74d;padding:12px;border-radius:8px;display:flex;justify-content:space-between;align-items:center}
+    .kpis{display:flex;gap:8px}
+    .kpi{flex:1;background:#f7fbff;padding:10px;border-radius:8px;text-align:center}
+    .list-item{padding:10px;border-bottom:1px solid #f0f0f0}
+    .muted{color:var(--muted);font-size:13px}
+    .btn{background:var(--accent);color:#fff;padding:10px 12px;border-radius:8px;border:0;font-weight:700}
+    .secondary{background:#eef3ff;color:var(--accent);border-radius:8px;padding:8px}
+    .row{display:flex;justify-content:space-between;align-items:center}
+    a{color:var(--accent);text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <div style="font-weight:700">Pop Salon</div>
+        <div class="muted">Tableau de bord propriétaire</div>
+      </div>
+      <div style="text-align:right">
+        <div class="muted">Salon: Le Pop</div>
+        <div style="margin-top:6px"><button class="secondary" onclick="alert('Menu');">☰</button></div>
+      </div>
+    </div>
+
+    <div id="firstBanner" class="card banner" style="display:none">
+      <div>
+        <div style="font-weight:700">Configurer ma page Facebook</div>
+        <div class="muted">Configurez la prise de rendez-vous via votre page Facebook et Messenger.</div>
+      </div>
+      <div>
+        <button class="btn" onclick="alert('Aller à la configuration Facebook (démo)');">Configurer</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="row">
+        <div style="font-weight:700">KPIs</div>
+        <div><button class="secondary" onclick="alert('Créer RDV (démo)');">Créer un RDV</button></div>
+      </div>
+      <div class="kpis" style="margin-top:12px">
+        <div class="kpi">
+          <div class="muted">RDV aujourd'hui</div>
+          <div style="font-size:20px;font-weight:700">5</div>
+        </div>
+        <div class="kpi">
+          <div class="muted">Demandes en attente</div>
+          <div style="font-size:20px;font-weight:700">2</div>
+        </div>
+        <div class="kpi">
+          <div class="muted">CA estimé</div>
+          <div style="font-size:20px;font-weight:700">€1,240</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="font-weight:700;margin-bottom:8px">Prochains rendez-vous</div>
+      <div class="list-item">08:30 — Martin — Coupe homme — <span class="muted">Confirmé</span></div>
+      <div class="list-item">10:00 — Léa — Balayage — <strong>Demande (à approuver)</strong></div>
+      <div class="list-item">11:15 — Sophie — Coloration — <span class="muted">Confirmé</span></div>
+      <div style="text-align:center;margin-top:10px"><button class="secondary" onclick="alert('Aller au calendrier');">Voir calendrier</button></div>
+    </div>
+
+    <div class="card">
+      <div style="font-weight:700;margin-bottom:8px">Notifications</div>
+      <div class="list-item">Demande de RDV reçue — Léa (10:00) <a href="#" onclick="alert('Voir demande');">Voir</a></div>
+      <div class="list-item">Rappel: configuration Facebook incomplète <a href="#" onclick="alert('Configurer Facebook');">Configurer</a></div>
+    </div>
+  </div>
+
+  <script>
+    // Démo: simuler première connexion
+    const firstTime = true; // basculer à false pour masquer la bannière
+    if(firstTime){document.getElementById('firstBanner').style.display='flex'}
+  </script>
+</body>
+</html>
