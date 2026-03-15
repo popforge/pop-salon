@@ -1,0 +1,39 @@
+// FICHIER GÉNÉRÉ AUTOMATIQUEMENT — forge generate
+// Mise à jour automatique par forge generate — ne modifiez pas manuellement.
+
+import type { RouteRecordRaw } from 'vue-router'
+
+export interface MenuItem {
+  id: string
+  label: string
+  icon: string
+  path: string
+  permission?: string
+}
+
+export const menuItems: MenuItem[] = [
+  {{- for entity in entities }}
+  {{- for ui in entity.ui_views }}
+  {
+    id: '{{ string_camel entity.name }}',
+    label: '{{ ui.title.fr ?? ui.title.en }}',
+    icon: '{{ ui.icon }}',
+    path: '/{{ ui.menu_path }}',
+    permission: '{{ ui.permissions.read }}',
+  },
+  {{- end }}
+  {{- end }}
+]
+
+export const routes: RouteRecordRaw[] = [
+  { path: '/', redirect: '/{{ (entities | array.first).ui_views[0].menu_path ?? "dashboard" }}' },
+  {{- for entity in entities }}
+  {{- for ui in entity.ui_views }}
+  {
+    path: '/{{ ui.menu_path }}',
+    component: () => import('@/views/{{ ui.name }}/{{ ui.name }}.vue'),
+    meta: { permission: '{{ ui.permissions.read }}' },
+  },
+  {{- end }}
+  {{- end }}
+]

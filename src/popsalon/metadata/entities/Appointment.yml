@@ -1,0 +1,94 @@
+Name: Appointment
+Module: AppointmentManager
+Namespace: Popsalon
+
+Properties:
+  - Name: Id
+    Type: Guid
+    IsKey: true
+    Generated: true
+
+  - Name: Date
+    Type: DateTime
+    Required: true
+    Label:
+      en: "Appointment Date"
+      fr: "Date du rendez-vous"
+
+  - Name: Notes
+    Type: string
+    MaxLength: 500
+    Required: false
+    Label:
+      en: "Notes"
+      fr: "Notes"
+
+  - Name: CustomerId
+    Type: Guid
+    Required: true
+    Relation:
+      Entity: Customer
+      Type: ManyToOne
+
+EntityView:
+  Name: AppointmentView
+  Properties:
+    - Name: Id
+      From: Id
+      Type: Guid
+    - Name: Date
+      From: Date
+      Type: DateTime
+    - Name: Notes
+      From: Notes
+      Type: string
+    - Name: CustomerId
+      From: CustomerId
+      Type: Guid
+    - Name: CustomerFullName
+      From: "Customer.FirstName + ' ' + Customer.LastName"
+      Type: string
+    - Name: CustomerEmail
+      From: Customer.Email
+      Type: string
+
+UIViews:
+  - Name: AppointmentUI
+    Template: MasterDetail
+    Title:
+      en: "Appointments"
+      fr: "Rendez-vous"
+    Icon: event
+    MenuPath: appointments
+    Permissions:
+      Read: appointments.read
+      Create: appointments.create
+      Update: appointments.update
+      Delete: appointments.delete
+    Columns:
+      - Property: Date
+        Format: "dd/MM/yyyy HH:mm"
+        Sortable: true
+      - Property: CustomerFullName
+        Label:
+          en: "Customer"
+          fr: "Client"
+        Sortable: true
+        Filterable: true
+    Form:
+      - Property: Date
+        Component: DateTimePicker
+      - Property: Notes
+        Component: Textarea
+      - Property: CustomerId
+        Component: EntityLookup
+        LookupView: CustomerView
+        DisplayField: CustomerFullName
+
+ValidationRules:
+  - Name: DateMustBeInFuture
+    Trigger: Saving
+    Description: "La date doit être dans le futur"
+
+LifecycleHooks:
+  OnSaved: []

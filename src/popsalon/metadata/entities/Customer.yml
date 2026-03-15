@@ -1,0 +1,105 @@
+Name: Customer
+Module: CustomerManager
+Namespace: Popsalon
+
+Properties:
+  - Name: Id
+    Type: Guid
+    IsKey: true
+    Generated: true
+
+  - Name: FirstName
+    Type: string
+    MaxLength: 100
+    Required: true
+    Label:
+      en: "First Name"
+      fr: "Prénom"
+
+  - Name: LastName
+    Type: string
+    MaxLength: 100
+    Required: true
+    Label:
+      en: "Last Name"
+      fr: "Nom"
+
+  - Name: Email
+    Type: string
+    MaxLength: 255
+    Required: false
+    Format: email
+    Label:
+      en: "Email"
+      fr: "Courriel"
+
+  - Name: Phone
+    Type: string
+    MaxLength: 20
+    Required: false
+    Format: phone
+    Label:
+      en: "Phone"
+      fr: "Téléphone"
+
+EntityView:
+  Name: CustomerView
+  Properties:
+    - Name: Id
+      From: Id
+      Type: Guid
+    - Name: FirstName
+      From: FirstName
+      Type: string
+    - Name: LastName
+      From: LastName
+      Type: string
+    - Name: FullName
+      From: "FirstName + ' ' + LastName"
+      Type: string
+    - Name: Email
+      From: Email
+      Type: string
+    - Name: Phone
+      From: Phone
+      Type: string
+
+UIViews:
+  - Name: CustomerUI
+    Template: MasterDetail
+    Title:
+      en: "Customers"
+      fr: "Clients"
+    Icon: people
+    MenuPath: customers
+    Permissions:
+      Read: customers.read
+      Create: customers.create
+      Update: customers.update
+      Delete: customers.delete
+    Columns:
+      - Property: FullName
+        Label:
+          en: "Name"
+          fr: "Nom"
+        Sortable: true
+        Filterable: true
+      - Property: Email
+        Sortable: true
+        Filterable: true
+      - Property: Phone
+        Sortable: false
+    Form:
+      - Property: FirstName
+        Component: TextInput
+      - Property: LastName
+        Component: TextInput
+      - Property: Email
+        Component: EmailInput
+      - Property: Phone
+        Component: TextInput
+
+ValidationRules:
+  - Name: EmailMustBeUniqueIfProvided
+    Trigger: Saving
+    Description: "L'adresse courriel doit être unique si fournie"

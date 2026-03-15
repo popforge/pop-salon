@@ -18,9 +18,9 @@ Languages:
 - fr
 
 ReferencedModules:
-  UserPermissions: 2.5.8
-  UICustomization: 2.5.8
-  NeosNotificationCenter: 2.5.8
+  UserPermissions: 3.0.6
+  UICustomization: 3.0.6
+  NeosNotificationCenter: 3.0.6
 
 # Generation log levels
 GenerationLogLevels:

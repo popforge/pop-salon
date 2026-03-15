@@ -1,0 +1,16 @@
+Name: Popsalon
+Version: 1.0.0
+Namespace: Popsalon
+Company: Popforge
+Languages:
+  - fr
+  - en
+Database:
+  Type: PostgreSQL
+  QuotedIdentifiers: false
+UI:
+  InfiniteScrolling: true
+  ThemeDefault: light
+Dependencies:
+  - UserPermissions
+  - Notifications

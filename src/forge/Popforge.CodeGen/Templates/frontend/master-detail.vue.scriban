@@ -1,0 +1,49 @@
+<!-- FICHIER GÉNÉRÉ AUTOMATIQUEMENT — forge generate -->
+<!-- Source : metadata/entities/{{ entity.name }}.yml -->
+<template>
+  <AppMasterDetail
+    v-model="selectedId"
+    :items="data?.value ?? []"
+    :columns="columns"
+    :is-loading="isLoading"
+    create-label="{{ ui_view.title.fr ?? ui_view.title.en }}"
+    @create="isCreateOpen = true"
+  >
+    <template #detail-content="{ selectedId: sid }">
+      <{{ entity.name }}Detail v-if="sid" :id="sid" @saved="refetch()" />
+    </template>
+  </AppMasterDetail>
+
+  <{{ entity.name }}CreateDialog v-model="isCreateOpen" @saved="refetch()" />
+</template>
+
+<script setup lang="ts">
+import { ref, computed } from 'vue'
+import type { QTableColumn } from 'quasar'
+import { useODataList } from '@/composables/useOData'
+import type { {{ entity.name }}View } from '@/dataObjects/{{ entity.name }}View'
+import AppMasterDetail from '@/components/templates/AppMasterDetail.vue'
+import {{ entity.name }}Detail from './{{ entity.name }}Detail.vue'
+import {{ entity.name }}CreateDialog from './{{ entity.name }}CreateDialog.vue'
+
+const selectedId = ref<string | null>(null)
+const isCreateOpen = ref(false)
+
+const odataOptions = ref({ orderBy: '{{ string_camel (ui_view.columns | array.first).property ?? "id" }}' })
+const { data, isLoading, refetch } = useODataList<{{ entity.name }}View>(
+  '{{ string_plural (string_camel entity.name) }}',
+  odataOptions
+)
+
+const columns: QTableColumn[] = [
+  {{- for col in ui_view.columns }}
+  {
+    name: '{{ string_camel col.property }}',
+    label: '{{ col.label.fr ?? col.label.en ?? col.property }}',
+    field: '{{ string_camel col.property }}',
+    sortable: {{ col.sortable }},
+    align: 'left',
+  },
+  {{- end }}
+]
+</script>

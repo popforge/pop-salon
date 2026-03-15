@@ -1,0 +1,35 @@
+// Traductions françaises
+export const fr = {
+  common: {
+    save: 'Enregistrer',
+    cancel: 'Annuler',
+    delete: 'Supprimer',
+    edit: 'Modifier',
+    close: 'Fermer',
+    search: 'Rechercher',
+    loading: 'Chargement...',
+    noData: 'Aucun résultat',
+    confirm: 'Confirmer',
+    yes: 'Oui',
+    no: 'Non',
+    new: 'Nouveau',
+    required: 'Ce champ est requis',
+  },
+  appointment: {
+    title: 'Rendez-vous',
+    date: 'Date',
+    notes: 'Notes',
+    customer: 'Client',
+    createTitle: 'Nouveau rendez-vous',
+    editTitle: 'Modifier le rendez-vous',
+  },
+  customer: {
+    title: 'Clients',
+    firstName: 'Prénom',
+    lastName: 'Nom',
+    email: 'Courriel',
+    phone: 'Téléphone',
+    createTitle: 'Nouveau client',
+    editTitle: 'Modifier le client',
+  },
+}

@@ -1,0 +1,37 @@
+// FICHIER GÉNÉRÉ AUTOMATIQUEMENT — forge generate
+// Source : metadata/entities/{{ entity.name }}.yml
+
+using FluentValidation;
+using MediatR;
+using {{ cluster.namespace }}.Domain.Entities;
+using {{ cluster.namespace }}.Domain.Interfaces;
+
+namespace {{ cluster.namespace }}.Application.Features.{{ entity.name }}s.Commands.Create;
+
+public record Create{{ entity.name }}Command(
+{{- for prop in entity.properties | array.filter @(do; p = $0; !p.is_key; end) }}
+    {{ prop.csharp_type }} {{ prop.name }}{{ if !for.last }},{{ end }}
+{{- end }}
+) : IRequest<Guid>;
+
+public class Create{{ entity.name }}CommandValidator : AbstractValidator<Create{{ entity.name }}Command>
+{
+    public Create{{ entity.name }}CommandValidator()
+    {
+        {{- for prop in entity.properties | array.filter @(do; p = $0; !p.is_key && p.required; end) }}
+        RuleFor(x => x.{{ prop.name }}).NotEmpty(){{ if prop.max_length }}.MaximumLength({{ prop.max_length }}){{ end }};
+        {{- end }}
+    }
+}
+
+public class Create{{ entity.name }}CommandHandler(I{{ entity.name }}Repository repository)
+    : IRequestHandler<Create{{ entity.name }}Command, Guid>
+{
+    public async Task<Guid> Handle(Create{{ entity.name }}Command request, CancellationToken ct)
+    {
+        // TODO: construire l'entité selon son constructeur de domaine
+        var entity = new {{ entity.name }}(/* TODO: paramètres */);
+        await repository.AddAsync(entity, ct);
+        return entity.Id;
+    }
+}

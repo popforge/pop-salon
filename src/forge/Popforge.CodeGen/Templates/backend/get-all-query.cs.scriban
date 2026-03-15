@@ -1,0 +1,29 @@
+// FICHIER GÉNÉRÉ AUTOMATIQUEMENT — forge generate
+// Source : metadata/entities/{{ entity.name }}.yml
+
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using {{ cluster.namespace }}.Application.Common.Interfaces;
+using {{ cluster.namespace }}.Application.EntityViews;
+
+namespace {{ cluster.namespace }}.Application.Features.{{ entity.name }}s.Queries.GetAll;
+
+public record GetAll{{ entity.name }}sQuery : IRequest<IQueryable<{{ entity.name }}View>>;
+
+public class GetAll{{ entity.name }}sQueryHandler(IApplicationDbContext db)
+    : IRequestHandler<GetAll{{ entity.name }}sQuery, IQueryable<{{ entity.name }}View>>
+{
+    public Task<IQueryable<{{ entity.name }}View>> Handle(GetAll{{ entity.name }}sQuery request, CancellationToken ct)
+    {
+        var query = db.{{ entity.name }}s
+            .AsNoTracking()
+            .Select(e => new {{ entity.name }}View
+            {
+                {{- for prop in entity.entity_view.properties }}
+                {{ prop.name }} = {{ if prop.is_computed }}/* TODO: projection calculée */ default{{ else }}e.{{ prop.from }}{{ end }},
+                {{- end }}
+            });
+
+        return Task.FromResult(query);
+    }
+}

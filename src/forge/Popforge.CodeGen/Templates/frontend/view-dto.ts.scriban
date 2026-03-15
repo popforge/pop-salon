@@ -1,0 +1,25 @@
+// FICHIER GÉNÉRÉ AUTOMATIQUEMENT — forge generate
+// Source : metadata/entities/{{ entity.name }}.yml
+
+/**
+ * DTO de lecture (CQRS read side) pour {{ entity.name }}.
+ * Généré depuis metadata/entities/{{ entity.name }}.yml
+ */
+export interface {{ entity.name }}View {
+  {{- for prop in entity.entity_view.properties }}
+  {{ string_camel prop.name }}: {{ prop.ts_type }}{{ if !prop.required && prop.name != "Id" }} | null{{ end }};
+  {{- end }}
+}
+
+export interface Create{{ entity.name }}Model {
+  {{- for prop in entity.properties | array.filter @(do; p = $0; !p.is_key; end) }}
+  {{ string_camel prop.name }}: {{ prop.ts_type }}{{ if !prop.required }} | null{{ end }};
+  {{- end }}
+}
+
+export interface Update{{ entity.name }}Model {
+  id: string;
+  {{- for prop in entity.properties | array.filter @(do; p = $0; !p.is_key; end) }}
+  {{ string_camel prop.name }}: {{ prop.ts_type }}{{ if !prop.required }} | null{{ end }};
+  {{- end }}
+}

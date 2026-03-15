@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>forge</AssemblyName>
+    <RootNamespace>Popforge.CodeGen</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>forge</ToolCommandName>
+    <PackageId>Popforge.CodeGen</PackageId>
+    <Version>1.0.0</Version>
+    <Description>Popforge code generation CLI — generates backend + frontend from YAML metadata</Description>
+    <Authors>Popforge</Authors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Spectre.Console.Cli" Version="0.49.1" />
+    <PackageReference Include="YamlDotNet" Version="15.3.0" />
+    <PackageReference Include="Scriban" Version="5.12.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.12.0" />
+  </ItemGroup>
+
+  <!-- Templates: copied to output dir so they can be edited without recompiling -->
+  <ItemGroup>
+    <Content Include="Templates\**\*.scriban">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

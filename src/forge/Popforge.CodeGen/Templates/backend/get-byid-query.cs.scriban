@@ -1,0 +1,32 @@
+// FICHIER GÉNÉRÉ AUTOMATIQUEMENT — forge generate
+// Source : metadata/entities/{{ entity.name }}.yml
+
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using {{ cluster.namespace }}.Application.Common.Exceptions;
+using {{ cluster.namespace }}.Application.Common.Interfaces;
+using {{ cluster.namespace }}.Application.EntityViews;
+
+namespace {{ cluster.namespace }}.Application.Features.{{ entity.name }}s.Queries.GetById;
+
+public record Get{{ entity.name }}ByIdQuery(Guid Id) : IRequest<{{ entity.name }}View>;
+
+public class Get{{ entity.name }}ByIdQueryHandler(IApplicationDbContext db)
+    : IRequestHandler<Get{{ entity.name }}ByIdQuery, {{ entity.name }}View>
+{
+    public async Task<{{ entity.name }}View> Handle(Get{{ entity.name }}ByIdQuery request, CancellationToken ct)
+    {
+        var view = await db.{{ entity.name }}s
+            .AsNoTracking()
+            .Where(e => e.Id == request.Id)
+            .Select(e => new {{ entity.name }}View
+            {
+                {{- for prop in entity.entity_view.properties }}
+                {{ prop.name }} = {{ if prop.is_computed }}/* TODO */ default{{ else }}e.{{ prop.from }}{{ end }},
+                {{- end }}
+            })
+            .FirstOrDefaultAsync(ct);
+
+        return view ?? throw new NotFoundException(nameof({{ entity.name }}), request.Id);
+    }
+}

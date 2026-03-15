@@ -121,3 +121,5 @@ coverage-final.json
 *.gz
 *.7z
 *.rar
+
+demo-popsalon/

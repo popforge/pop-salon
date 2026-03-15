@@ -1,0 +1,30 @@
+export const en = {
+  appointments: 'Appointments',
+  customers: 'Customers',
+  actions: {
+    create: 'New',
+    edit: 'Edit',
+    delete: 'Delete',
+    save: 'Save',
+    cancel: 'Cancel',
+    close: 'Close',
+    confirm: 'Confirm',
+  },
+  messages: {
+    confirmDelete: 'Are you sure you want to delete this item?',
+    deleteSuccess: 'Item deleted successfully.',
+    saveSuccess: 'Saved successfully.',
+    loadError: 'Error loading data.',
+  },
+  fields: {
+    firstName: 'First Name',
+    lastName: 'Last Name',
+    email: 'Email',
+    phone: 'Phone',
+    customerId: 'Customer',
+    scheduledAt: 'Scheduled At',
+    durationMinutes: 'Duration (min)',
+    notes: 'Notes',
+    status: 'Status',
+  },
+}
