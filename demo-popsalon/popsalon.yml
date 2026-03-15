@@ -1,0 +1,41 @@
+# Cluster configuration
+# To see all available options, refer to the documentation
+# https://documentation.neos.groupeisagri.com/articles/cluster-and-module/cluster-configuration.html
+
+# Root namespace for the generated application
+RootNamespace: Popsalon
+# Cluster name
+ClusterName: Popsalon
+# Cluster version
+ClusterVersion: 0.0.1
+# Cluster description
+ClusterTitle: Popsalon
+# Company name
+Company: popforge
+
+Languages:
+- en
+- fr
+
+ReferencedModules:
+  UserPermissions: 2.5.8
+  UICustomization: 2.5.8
+  NeosNotificationCenter: 2.5.8
+
+# Generation log levels
+GenerationLogLevels:
+  M0004: Warning # UnconfiguredRoute
+  M0063: Warning # UICSharpWarning
+
+# Database configuration
+Database:
+  QuotedIdentifiers: false
+
+# UI behavior
+UIDefaultBehavior:
+  DatagridInfiniteScrolling: true
+  FilterBarDisplayMode: editable-chips
+
+# La méthode serveur "RemoveAllUserNotifications" est une méthode serveur en arrière-plan. 
+# Le TaskRunner doit être activé afin qu'elle puisse être exécuté.
+TaskRunnerExecutionMode: IsolatedProcess

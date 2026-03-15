@@ -1,0 +1,3 @@
+[*.cs]
+# Force utf-8 encoding when saving files
+charset = utf-8
