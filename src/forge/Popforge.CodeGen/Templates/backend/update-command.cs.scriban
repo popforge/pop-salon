@@ -11,7 +11,7 @@ namespace {{ cluster.namespace }}.Application.Features.{{ entity.name }}s.Comman
 public record Update{{ entity.name }}Command(
     Guid Id,
 {{- for prop in entity.properties | array.filter @(do; p = $0; !p.is_key; end) }}
-    {{ prop.csharp_type }}{{ if prop.nullable }}?{{ end }} {{ prop.name }}{{ if !for.last }},{{ end }}
+    {{ prop.csharp_type }} {{ prop.name }}{{ if !for.last }},{{ end }}
 {{- end }}
 ) : IRequest;
 

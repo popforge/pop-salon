@@ -8,14 +8,14 @@ using {{ cluster.namespace }}.Application.EntityViews;
 
 namespace {{ cluster.namespace }}.Application.Features.{{ entity.name }}s.Queries.GetAll;
 
-public record GetAll{{ entity.name }}sQuery : IRequest<IQueryable<{{ entity.name }}View>>;
+public record GetAll{{ string_plural entity.name }}Query : IRequest<IQueryable<{{ entity.name }}View>>;
 
-public class GetAll{{ entity.name }}sQueryHandler(IApplicationDbContext db)
-    : IRequestHandler<GetAll{{ entity.name }}sQuery, IQueryable<{{ entity.name }}View>>
+public class GetAll{{ string_plural entity.name }}QueryHandler(IApplicationDbContext db)
+    : IRequestHandler<GetAll{{ string_plural entity.name }}Query, IQueryable<{{ entity.name }}View>>
 {
-    public Task<IQueryable<{{ entity.name }}View>> Handle(GetAll{{ entity.name }}sQuery request, CancellationToken ct)
+    public Task<IQueryable<{{ entity.name }}View>> Handle(GetAll{{ string_plural entity.name }}Query request, CancellationToken ct)
     {
-        var query = db.{{ entity.name }}s
+        var query = db.{{ string_plural entity.name }}
             .AsNoTracking()
             .Select(e => new {{ entity.name }}View
             {

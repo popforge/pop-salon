@@ -1,5 +1,4 @@
 using Popforge.CodeGen.Models;
-using Spectre.Console;
 
 namespace Popforge.CodeGen.Validators;
 
@@ -32,13 +31,26 @@ public static class MetadataValidator
                 if (string.IsNullOrWhiteSpace(prop.Type))
                     errors.Add($"{prefix} : la propriété '{prop.Name}' doit avoir un 'Type'.");
             }
-        }
 
-        if (errors.Count > 0)
-        {
-            AnsiConsole.MarkupLine("[red]Erreurs de validation :[/]");
-            foreach (var e in errors)
-                AnsiConsole.MarkupLine($"  [red]✗[/] {e}");
+            if (entity.EntityView != null)
+            {
+                var entityPropNames = entity.Properties.Select(p => p.Name).ToHashSet(StringComparer.OrdinalIgnoreCase);
+                foreach (var vp in entity.EntityView.Properties)
+                {
+                    if (string.IsNullOrWhiteSpace(vp.From))
+                        errors.Add($"{prefix} : EntityView.Properties['{vp.Name}'] : 'From' est requis.");
+                    else if (!vp.IsComputed && !entityPropNames.Contains(vp.From))
+                        errors.Add($"{prefix} : EntityView.Properties['{vp.Name}'].From = '{vp.From}' ne correspond à aucune propriété de l'entité.");
+                }
+            }
+
+            foreach (var uiView in entity.UIViews)
+            {
+                if (string.IsNullOrWhiteSpace(uiView.Name))
+                    errors.Add($"{prefix} : un UIView a un nom vide.");
+                if (string.IsNullOrWhiteSpace(uiView.Template))
+                    errors.Add($"{prefix} : UIView '{uiView.Name}' : 'Template' est requis.");
+            }
         }
 
         return errors.Count == 0;

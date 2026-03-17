@@ -11,8 +11,18 @@ public class ViewPropertyDefinition
     public string Name { get; set; } = "";
     public string From { get; set; } = "";
     public string Type { get; set; } = "string";
+    public bool Required { get; set; }
 
     public bool IsComputed => From.Contains('+') || From.Contains('.');
+
+    public string TsType => Type switch
+    {
+        "Guid" => "string",
+        "DateTime" => "string",  // ISO string
+        "int" or "decimal" or "double" or "float" => "number",
+        "bool" => "boolean",
+        _ => "string",
+    };
 }
 
 public class UIViewDefinition

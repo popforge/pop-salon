@@ -18,6 +18,10 @@ public class TemplateRenderer
         _templatesRoot = Path.Combine(
             Path.GetDirectoryName(typeof(TemplateRenderer).Assembly.Location)!,
             "Templates");
+
+        if (!Directory.Exists(_templatesRoot))
+            throw new DirectoryNotFoundException(
+                $"Dossier de templates introuvable : {_templatesRoot}");
     }
 
     public string Render(string templateRelativePath, object model)
@@ -37,7 +41,7 @@ public class TemplateRenderer
             _cache[fullPath] = template;
         }
 
-        var ctx = new TemplateContext { StrictVariables = false };
+        var ctx = new TemplateContext { StrictVariables = true };
         var scriptObject = new ScriptObject();
         scriptObject.Import(model);
         scriptObject.Import("string_camel", new Func<string, string>(StringHelpers.ToCamelCase));
@@ -49,7 +53,7 @@ public class TemplateRenderer
     }
 }
 
-internal static class StringHelpers
+public static class StringHelpers
 {
     public static string ToCamelCase(string s)
         => string.IsNullOrEmpty(s) ? s : char.ToLower(s[0]) + s[1..];

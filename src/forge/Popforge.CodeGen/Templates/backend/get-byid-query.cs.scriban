@@ -16,7 +16,7 @@ public class Get{{ entity.name }}ByIdQueryHandler(IApplicationDbContext db)
 {
     public async Task<{{ entity.name }}View> Handle(Get{{ entity.name }}ByIdQuery request, CancellationToken ct)
     {
-        var view = await db.{{ entity.name }}s
+        var view = await db.{{ string_plural entity.name }}
             .AsNoTracking()
             .Where(e => e.Id == request.Id)
             .Select(e => new {{ entity.name }}View

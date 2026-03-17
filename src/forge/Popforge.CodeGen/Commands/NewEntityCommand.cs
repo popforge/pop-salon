@@ -1,3 +1,4 @@
+using Popforge.CodeGen.Generators;
 using Popforge.CodeGen.Models;
 using Spectre.Console;
 using Spectre.Console.Cli;
@@ -31,7 +32,8 @@ public class NewEntityCommand : Command<NewEntityCommand.Settings>
 
         // S'assurer que c'est PascalCase
         name = char.ToUpper(name[0]) + name[1..];
-        var pluralLower = name.ToLower() + "s";
+        var plural = StringHelpers.ToPlural(name);
+        var pluralLower = StringHelpers.ToCamelCase(plural);
 
         var dir = Path.Combine(Directory.GetCurrentDirectory(), settings.OutputPath);
         Directory.CreateDirectory(dir);
@@ -46,7 +48,7 @@ public class NewEntityCommand : Command<NewEntityCommand.Settings>
         var stub = $"""
 Name: {name}
 Module: {name}
-Namespace: # TODO: ex: MyCompany.MyCluster
+Namespace: "" # TODO: ex: MyCompany.MyCluster
 
 Properties:
   - Name: Id

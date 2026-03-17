@@ -19,27 +19,27 @@ public class FrontendGenerator(TemplateRenderer renderer, string projectRoot, bo
 
             // TypeScript DTO
             Write("frontend/view-dto.ts.scriban", model,
-                Path.Combine(frontendSrc, "dataObjects", $"{entity.Name}View.ts"));
+                Path.Combine(frontendSrc, "Generated", "dataObjects", $"{entity.Name}View.ts"));
 
             // API service
             Write("frontend/entity-service.ts.scriban", model,
-                Path.Combine(frontendSrc, "services", $"{StringHelpers.ToCamelCase(entity.Name)}.service.ts"));
+                Path.Combine(frontendSrc, "Generated", "services", $"{StringHelpers.ToCamelCase(entity.Name)}.service.ts"));
 
-            // Vue UI component
-            if (entity.UIViews.Any())
+            // Vue UI component — one file per declared UIView
+            foreach (var uiView in entity.UIViews)
             {
-                var uiView = entity.UIViews[0];
+                var templateName = uiView.Template.ToLowerInvariant();
                 var viewModel = new { cluster, entity, ui_view = uiView };
 
-                Write("frontend/master-detail.vue.scriban", viewModel,
-                    Path.Combine(frontendSrc, "views", $"{uiView.Name}", $"{uiView.Name}.vue"));
+                Write($"frontend/{templateName}.vue.scriban", viewModel,
+                    Path.Combine(frontendSrc, "Generated", "views", uiView.Name, $"{uiView.Name}.vue"));
             }
         }
 
-        // Regénère l'app-config et menu-items (merge)
+        // Regénère l'app-config et menu-items
         var allModel = new { cluster, entities = entityList };
         Write("frontend/menu-items.ts.scriban", allModel,
-            Path.Combine(frontendSrc, "menu-items.ts"));
+            Path.Combine(frontendSrc, "Generated", "menu-items.ts"));
     }
 
     private void Write(string template, object model, string outputPath)
@@ -73,6 +73,10 @@ public class FrontendGenerator(TemplateRenderer renderer, string projectRoot, bo
         catch (FileNotFoundException ex)
         {
             AnsiConsole.MarkupLine($"  [red]✗ Template manquant : {ex.FileName}[/]");
+        }
+        catch (Exception ex)
+        {
+            AnsiConsole.MarkupLine($"  [red]✗ Erreur dans le template {template} : {ex.Message}[/]");
         }
     }
 }

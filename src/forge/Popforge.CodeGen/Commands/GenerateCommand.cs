@@ -51,7 +51,10 @@ public class GenerateCommand : Command<GenerateCommand.Settings>
         // 2. Valider
         if (!MetadataValidator.Validate(cluster, entities, out var errors))
         {
-            AnsiConsole.MarkupLine("[red]Validation échouée. Corrigez les erreurs ci-dessus et relancez.[/]");
+            AnsiConsole.MarkupLine("[red]Erreurs de validation :[/]");
+            foreach (var e in errors)
+                AnsiConsole.MarkupLine($"  [red]\u2717[/] {e}");
+            AnsiConsole.MarkupLine("[red]Corrigez les erreurs ci-dessus et relancez.[/]");
             return 1;
         }
 
