@@ -35,14 +35,13 @@ public class GenerateCommand : Command<GenerateCommand.Settings>
     public override int Execute(CommandContext context, Settings settings)
     {
         var root = Directory.GetCurrentDirectory();
-        var metadataDir = Path.Combine(root, settings.MetadataPath);
 
-        AnsiConsole.MarkupLine("[bold cyan]Forge — Popforge Code Generator[/]");
-        AnsiConsole.MarkupLine($"Métadonnées : [dim]{metadataDir}[/]");
+        AnsiConsole.MarkupLine("[bold cyan]Forge \u2014 Popforge Code Generator[/]");
+        AnsiConsole.MarkupLine($"Cluster : [dim]{root}[/]");
         AnsiConsole.WriteLine();
 
         // 1. Parser les métadonnées
-        (var cluster, var entities) = YamlMetadataParser.ParseAll(metadataDir);
+        (var cluster, var entities) = YamlMetadataParser.ParseAll(root, settings.MetadataPath);
 
         AnsiConsole.MarkupLine($"Cluster : [bold]{cluster.Name}[/] v{cluster.Version}");
         AnsiConsole.MarkupLine($"Entités : [bold]{entities.Count}[/] ({string.Join(", ", entities.Select(e => e.Name))})");

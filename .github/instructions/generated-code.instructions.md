@@ -22,7 +22,17 @@ The current cluster is **PopSalon** (`src/popsalon/`), but the same structure ap
 - Domain entities are not generated; only Application + Infrastructure + Api layers have generated code.
 - For TypeScript, add a companion `.ts` file that imports and extends the generated interface.
 
-## File placement
+## Metadata file placement
+```
+src/{cluster}/
+  cluster.yml              ← cluster-level metadata (name, namespace, version)
+                             ALWAYS at the cluster root, never inside metadata/
+  metadata/
+    entities/
+      {Entity}.yml         ← one file per entity (properties, EntityView, UIViews)
+```
+
+## Generated code file placement
 Paths below use `{Cluster}` as a placeholder (e.g. `Popsalon`).
 ```
 {Cluster}.Application/

@@ -62,6 +62,10 @@ public static class StringHelpers
         => string.Concat(s.Select((c, i) =>
             i > 0 && char.IsUpper(c) ? "_" + char.ToLower(c) : char.ToLower(c).ToString()));
 
+    public static string ToKebabCase(string s)
+        => string.Concat(s.Select((c, i) =>
+            i > 0 && char.IsUpper(c) ? "-" + char.ToLower(c) : char.ToLower(c).ToString()));
+
     public static string ToPlural(string s)
         => s.EndsWith('s') ? s : s + "s";
 }

@@ -55,14 +55,15 @@ public class BackendGenerator(TemplateRenderer renderer, string projectRoot, boo
     {
         try
         {
-            var content = renderer.Render(template, model);
             var label = Path.GetFileName(outputPath);
 
             if (dryRun)
             {
-                AnsiConsole.MarkupLine($"  [dim][dry-run][/] {label}");
+                AnsiConsole.MarkupLine($"  [dim][[dry-run]][/] {label}");
                 return;
             }
+
+            var content = renderer.Render(template, model);
 
             // Ne pas écraser les fichiers modifiés manuellement
             if (File.Exists(outputPath))

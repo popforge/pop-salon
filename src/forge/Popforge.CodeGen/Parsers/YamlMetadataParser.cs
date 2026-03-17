@@ -23,15 +23,20 @@ public static class YamlMetadataParser
         return Deserializer.Deserialize<EntityDefinition>(yaml);
     }
 
-    public static (ClusterDefinition Cluster, List<EntityDefinition> Entities) ParseAll(string metadataDir)
+    public static (ClusterDefinition Cluster, List<EntityDefinition> Entities) ParseAll(
+        string clusterRoot,
+        string metadataSubDir = "metadata")
     {
-        var clusterPath = Path.Combine(metadataDir, "cluster.yml");
+        // cluster.yml est toujours à la racine du cluster, pas dans metadata/
+        var clusterPath = Path.Combine(clusterRoot, "cluster.yml");
         if (!File.Exists(clusterPath))
-            throw new FileNotFoundException($"cluster.yml introuvable dans : {metadataDir}");
+            throw new FileNotFoundException(
+                $"cluster.yml introuvable dans : {clusterRoot}" +
+                $"\nCe fichier doit se trouver à la racine du cluster (et non dans {metadataSubDir}/).");
 
         var cluster = ParseCluster(clusterPath);
 
-        var entitiesDir = Path.Combine(metadataDir, "entities");
+        var entitiesDir = Path.Combine(clusterRoot, metadataSubDir, "entities");
         var entities = new List<EntityDefinition>();
 
         if (Directory.Exists(entitiesDir))

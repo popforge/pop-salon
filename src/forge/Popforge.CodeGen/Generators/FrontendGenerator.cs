@@ -28,7 +28,7 @@ public class FrontendGenerator(TemplateRenderer renderer, string projectRoot, bo
             // Vue UI component — one file per declared UIView
             foreach (var uiView in entity.UIViews)
             {
-                var templateName = uiView.Template.ToLowerInvariant();
+                var templateName = StringHelpers.ToKebabCase(uiView.Template);
                 var viewModel = new { cluster, entity, ui_view = uiView };
 
                 Write($"frontend/{templateName}.vue.scriban", viewModel,
@@ -46,14 +46,15 @@ public class FrontendGenerator(TemplateRenderer renderer, string projectRoot, bo
     {
         try
         {
-            var content = renderer.Render(template, model);
             var label = Path.GetFileName(outputPath);
 
             if (dryRun)
             {
-                AnsiConsole.MarkupLine($"  [dim][dry-run][/] {label}");
+                AnsiConsole.MarkupLine($"  [dim][[dry-run]][/] {label}");
                 return;
             }
+
+            var content = renderer.Render(template, model);
 
             if (File.Exists(outputPath))
             {
