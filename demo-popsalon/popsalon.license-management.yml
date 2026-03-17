@@ -1,6 +1,0 @@
-LicenseManagement:
-  # Persistence type
-  DatabaseType: PostgreSql
-  # PostgreSQL
-  ConnectionString: Server=localhost;Port=5432;Database=PopSalon.LicenseManagement;User Id=postgres;Password=Installsiga*
-  DefaultUserAccountLogin: rachel.lavoie@siga.net
