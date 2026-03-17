@@ -87,8 +87,7 @@ _bmad-output
 
 # Conserver les fichiers de configuration personnalisés si présents
 !_bmad/_config/
-#!_bmad/_config/agents/
-_bmad/_config/agents/
+!_bmad/_config/agents/
 _bmad/bmm/
 _bmad/cis/
 _bmad/core/
