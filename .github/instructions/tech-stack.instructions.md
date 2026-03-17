@@ -36,15 +36,6 @@ The current cluster in this repository is **PopSalon** (`src/popsalon/`), but th
 | Dates | dayjs 1 |
 | CSS pre-processor | sass-embedded |
 
-## Forge CLI — `src/forge/Popforge.CodeGen/`
-| Concern | Technology |
-|---|---|
-| CLI framework | Spectre.Console.Cli 0.49 |
-| YAML parsing | YamlDotNet 15 |
-| Templating | Scriban 5 (file-based, not embedded) |
-| C# parsing (generate-metadata) | Microsoft.CodeAnalysis.CSharp 4 (Roslyn) |
-| Tool packaging | `<PackAsTool>true</PackAsTool>`, command name: `forge` |
-
 ## Infrastructure
 | Concern | Technology |
 |---|---|
