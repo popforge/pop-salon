@@ -1,0 +1,64 @@
+---
+applyTo: "**"
+---
+
+# Tech stack reference
+
+## Backend — `src/popsalon/backend/`
+| Concern | Technology |
+|---|---|
+| Runtime | .NET 8 / ASP.NET Core 8, C# 12 |
+| Architecture | Clean Architecture: Domain → Application → Infrastructure → Api |
+| Pattern | DDD, CQRS-lite (MediatR for commands/queries, IQueryable for OData reads) |
+| ORM | EF Core 8 + Npgsql 8.x (PostgreSQL) |
+| Validation | FluentValidation 11 (commands + MediatR pipeline behavior) |
+| Mediator | MediatR 12 with `ValidationBehavior` pipeline |
+| OData | Microsoft.AspNetCore.OData 8 — controllers return `IQueryable<View>` with `[EnableQuery]` |
+| API docs | Swashbuckle + Scalar.AspNetCore 2 (replaces SwaggerUI) |
+| Logging | Serilog 8 (structured, reads from appsettings) |
+| Auth | Microsoft.AspNetCore.Authentication.JwtBearer 8 (not yet configured) |
+| Testing | xUnit 2 + FluentAssertions 7 + Microsoft.AspNetCore.Mvc.Testing + EF InMemory |
+
+## Frontend — `src/popsalon/frontend/`
+| Concern | Technology |
+|---|---|
+| Framework | Vue 3.5 + TypeScript + Vite 6 |
+| UI library | Quasar 2 (components + SCSS theme via `src/themes/variables.scss`) |
+| State / data | TanStack Query 5 (`useQuery`, `useMutation`) |
+| HTTP | Axios 1 with JWT interceptor (`src/services/api.service.ts`) |
+| OData | `odata-query` npm package + composables `useODataList`, `useODataItem` |
+| Routing | Vue Router 4 |
+| i18n | vue-i18n 9 (fr + en, messages in `src/resources/`) |
+| Forms | vee-validate 4 + zod 3 |
+| Dates | dayjs 1 |
+| CSS pre-processor | sass-embedded |
+
+## Forge CLI — `src/forge/Popforge.CodeGen/`
+| Concern | Technology |
+|---|---|
+| CLI framework | Spectre.Console.Cli 0.49 |
+| YAML parsing | YamlDotNet 15 |
+| Templating | Scriban 5 (file-based, not embedded) |
+| C# parsing (generate-metadata) | Microsoft.CodeAnalysis.CSharp 4 (Roslyn) |
+| Tool packaging | `<PackAsTool>true</PackAsTool>`, command name: `forge` |
+
+## Infrastructure
+| Concern | Technology |
+|---|---|
+| Containers | Docker Compose (postgres:16 + api + nginx frontend) |
+| API port | 5000 (host) → 8080 (container) |
+| Frontend port | 8088 (host) → 80 (nginx container) |
+| Database | PostgreSQL 16 |
+
+## C# conventions
+- File-scoped namespaces (`namespace Foo.Bar;`)
+- Primary constructors for services and handlers
+- Records for commands, queries, and view models
+- `required` and `init` setters preferred over constructors for DTOs
+- `async/await` throughout; no `.Result` or `.Wait()`
+
+## TypeScript / Vue conventions  
+- `<script setup lang="ts">` for all Vue components
+- `defineProps` / `defineEmits` with explicit types
+- Services are plain exported `const` objects (not classes)
+- All API calls return typed promises; no `any` except at system boundary
