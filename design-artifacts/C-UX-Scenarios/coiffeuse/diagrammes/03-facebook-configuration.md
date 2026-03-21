@@ -5,12 +5,12 @@
 
 **Lien cible de réservation** : https://popforge.github.io/pop-salon/client/flow-02-identification.html
 
-Note: Ces actions seront présentées directement dans l'interface "Configurer les rendez‑vous" de l'application coiffeuse une fois la propriétaire authentifiée. Le contenu ci‑dessous est une version texte de référence pour l'équipe produit et le contenu in‑app.
+Note: Ces actions seront présentées directement dans l'interface "Configurer ma page Facebook" de l'application coiffeuse une fois la propriétaire authentifiée. Le contenu ci‑dessous est une version texte de référence pour l'équipe produit et le contenu in‑app.
 
 ```mermaid
 flowchart TD
   A[Proprietaire authentifie ouvre le tableau de bord]
-  A --> B[Ouvrir la section Configurer les rendez-vous]
+  A --> B[Ouvrir la section Configurer ma page facebook]
   B --> C{Choisir canal a configurer}
   C -->|Facebook| D[Afficher instructions Facebook]
 

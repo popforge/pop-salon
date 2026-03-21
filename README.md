@@ -18,8 +18,7 @@ Les modules d’inventaire, de tarification, de facturation et de comptabilité 
 
 ## Documentation
 
-- `persona.md` : persona de référence du projet
-- `prd.md` : cadrage produit et portée du POC
+- Toute la documentation de développement se retrouve sous `design-artifacts/`
 
 ## Statut
 
@@ -27,12 +26,7 @@ Projet en phase de cadrage / exploration produit.
 
 ## Contribuer
 
-Le projet est encore au début, donc avant d’implémenter quoi que ce soit, l’idée est de garder une discipline simple :
-
-1. lire `persona.md` et `prd.md` ;
-2. discuter du besoin avant de coder une fonctionnalité importante ;
-3. privilégier les contributions petites, ciblées et cohérentes avec le POC ;
-4. éviter d’élargir le périmètre sans validation.
+Le projet est encore au début, donc avant d’implémenter quoi que ce soit, l’idée est de garder une discipline simple : privilégier les contributions petites, ciblées et cohérentes avec le POC.
 
 ### Workflow suggéré
 
@@ -56,7 +50,6 @@ For more information :
 - [VsCode: custom-instructions](https://docs.github.com/en/copilot/how-tos/custom-instructions/adding-repository-custom-instructions-for-github-copilot)
 - [VsCode: copilot-customization](https://code.visualstudio.com/docs/copilot/copilot-customization)
 - [Visual Studio: custom-instructions](https://docs.github.com/en/copilot/how-tos/custom-instructions/adding-repository-custom-instructions-for-github-copilot-in-visual-studio)
-
 
 ## Nom du projet
 

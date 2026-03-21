@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+		{
+			"path": "../../../s/Neos"
+		},
+		{
+			"path": "../PopSalon-demo"
+		},
+		{
+			"path": "../Forge"
+		}
+	],
+	"settings": {}
+}
