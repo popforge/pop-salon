@@ -1,0 +1,37 @@
+name: Generate Changes Manifest
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-manifest:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Generate manifest.json
+        shell: pwsh
+        run: |
+          if (-not (Test-Path tools\generate-changes-manifest.ps1)) { Write-Host "generator not found"; exit 1 }
+          pwsh -File tools\generate-changes-manifest.ps1 -out "design-artifacts/changes/manifest.json"
+
+      - name: Commit manifest if changed
+        shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add design-artifacts/changes/manifest.json || true
+          $status = git status --porcelain
+          if ($status) {
+            git commit -m "chore(changes): update manifest.json" || true
+            git push origin HEAD:main
+          } else {
+            Write-Host "No changes to manifest"
+          }

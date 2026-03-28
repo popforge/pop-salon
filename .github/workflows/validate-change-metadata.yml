@@ -1,0 +1,42 @@
+name: Validate Change Metadata
+
+on:
+  pull_request:
+    paths-ignore: ['README.md']
+  push:
+    branches:
+      - main
+      - 'release/**'
+
+jobs:
+  validate:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run validation script
+        shell: pwsh
+        run: |
+          if (-not (Test-Path tools\validate-change-metadata.ps1)) {
+            Write-Host "Validation script not found; failing workflow."; exit 1
+          }
+
+          if ($env:GITHUB_EVENT_NAME -eq 'pull_request') {
+            $baseRef = '${{ github.event.pull_request.base.sha }}'
+            $headRef = '${{ github.sha }}'
+            Write-Host "Detecting changed files between $baseRef and $headRef"
+            $files = git diff --name-only $baseRef...$headRef | Where-Object { $_ -ne '' }
+          } else {
+            git fetch origin main --depth=1 || true
+            $files = git diff --name-only origin/main...HEAD | Where-Object { $_ -ne '' }
+          }
+
+          if ($files -and $files.Count -gt 0) {
+            $list = ($files -join ',')
+            Write-Host "Validating files: $list"
+            pwsh -File tools\validate-change-metadata.ps1 --files "$list"
+          } else {
+            Write-Host "No changed files detected; running full validation"
+            pwsh -File tools\validate-change-metadata.ps1
+          }

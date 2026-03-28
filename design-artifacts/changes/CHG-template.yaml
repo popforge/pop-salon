@@ -1,0 +1,18 @@
+id: CHG-YYYYMMDD-NN
+title: "Short title"
+summary: |
+  One-paragraph summary explaining intent and rationale of the change.
+author: Your Name <you@example.com>
+date: 2026-03-26
+scope:
+  - path/to/modified/file1
+  - path/to/modified/file2
+pr: ""  # l'URL de la Pull Request
+commit: ""  # SHA principal du commit
+ticket: ""  # ticket lié (Jira/GH issue)
+dependencies: []
+status: draft # draft | merged | deployed
+migration_notes: |
+  - étape 1: ...
+  - étape 2: ...
+tests_updated: false

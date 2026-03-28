@@ -1,0 +1,14 @@
+name: workspace-preferences
+description: "Workspace-level preferences for BMad Method and tooling"
+createdBy: "assistant"
+createdAt: 2026-03-26T20:10:00.000Z
+
+# Preferences documented here are intended to be machine-readable
+# and authoritative for tooling that needs workspace conventions.
+preferences:
+  # Root directory where utility scripts live (relative to project root)
+  utility_scripts_root: "scripts/"
+
+notes:
+  - rationale: "Centralize utility scripts at repository root for consistency across projects and CI."
+  - recommended_usage: "Have bootstrap/CI tasks read this file to locate utility scripts instead of hardcoding paths."
